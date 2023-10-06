@@ -26,7 +26,7 @@ public class StockServer {
                 Socket socketPedido = welcomeSocket.accept();
 
 // Start a GetPresencesRequestHandler thread
-                GetPresencesRequestHandler GPRH = new GetPresencesRequestHandler(socketPedido, presences);
+                GetStockRequestHandler GPRH = new GetStockRequestHandler(socketPedido, stock);
                 GPRH.start();
 
 

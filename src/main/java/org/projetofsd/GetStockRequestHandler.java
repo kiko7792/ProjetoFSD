@@ -11,13 +11,13 @@ import java.util.Vector;
 
 public class GetStockRequestHandler {
     Socket ligacao;
-    Presences presences;
+    Stock stock;
     BufferedReader in;
     PrintWriter out;
 
-    public GetStockRequestHandler(Socket ligacao, Presences presences) {
+    public GetStockRequestHandler(Socket ligacao, Stock stock) {
         this.ligacao = ligacao;
-        this.presences = presences;
+        this.stock = stock;
         try
         {
             this.in = new BufferedReader (new InputStreamReader(ligacao.getInputStream()));
@@ -42,7 +42,7 @@ public class GetStockRequestHandler {
             if (metodo.equals("get")) {
                 response = "101\n";
                 String ip = tokens.nextToken();
-                Vector<String> ipList = presences.getPresences(ip);
+                Vector<String> ipList = stock.getStock(ip);
                 response += ipList.size() + "\n";
                 for (Iterator<String> it = ipList.iterator(); it.hasNext();){
                     String next = it.next();
