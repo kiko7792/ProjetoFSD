@@ -10,10 +10,10 @@ public class Client {
         String servidor = DEFAULT_HOST;
         int porto = DEFAULT_PORT;
 
-        if (args.length != 1) {
+        /*if (args.length != 1) {
             System.out.println("Erro: use java presencesClient <ip>");
             System.exit(-1);
-        }
+        }*/
 
         // Create a representation of the IP address of the Server: API java.net.InetAddress
         InetAddress serverAddress = InetAddress.getByName("localhost");
@@ -27,10 +27,10 @@ public class Client {
             // Create a java.io.PrintWriter for the Socket; Use java.io.Socket.etOutputStream() to obtain the Socket output stream
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 
-            String request = "get" + " " + args[0];
+            //String request = "get" + " " + args[0];
 
             // write the request into the Socket
-            out.println(request);
+            //out.println(request);
 
             // Read the server response - read the data until null
             String msg;

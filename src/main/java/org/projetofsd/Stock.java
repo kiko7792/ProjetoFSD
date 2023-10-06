@@ -5,10 +5,9 @@ import java.util.*;
 
 public class Stock {
 
-    private static Hashtable<String, IPInfo> presentIPs = new Hashtable<String, IPInfo>();
+    private static Hashtable<String, StockInfo> presentStock = new Hashtable<String, StockInfo>();
     private static int cont = 0;
-
-    public Vector<String> getPresences(String IPAddress) {
+    public Vector<String> getStock(String identifier) {
 
         long actualTime = new Date().getTime();
         cont = cont+1;
@@ -17,44 +16,71 @@ public class Stock {
 
         //Assume-se que o IP e valido!!!!!
         synchronized(this) {
-            if (presentIPs.containsKey(IPAddress)) {
-                IPInfo newIp = presentIPs.get(IPAddress);
+            if (presentStock.containsKey(identifier)) {
+                StockInfo newIp = presentStock.get(identifier);
                 newIp.setLastSeen(actualTime);
             }
             else {
-                IPInfo newIP = new IPInfo(IPAddress, actualTime);
-                presentIPs.put(IPAddress,newIP);
+                StockInfo newStock = new StockInfo(identifier, actualTime);
+                presentStock.put(identifier,newStock);
             }
         }
-        return getIPList();
+        return getStockList();
     }
 
-    private Vector<String> getIPList(){
+    private Vector<String> getStockList(){
         Vector<String> result = new Vector<String>();
-        for (Enumeration<IPInfo> e = presentIPs.elements(); e.hasMoreElements(); ) {
-            IPInfo element = e.nextElement();
+        for (Enumeration<StockInfo> e = presentStock.elements(); e.hasMoreElements(); ) {
+            StockInfo element = e.nextElement();
             if (!element.timeOutPassed(180*1000)) {
-                result.add(element.getIP());
+                result.add(element.getId());
             }
         }
         return result;
     }
 }
 
-class IPInfo {
+class StockInfo {
 
-    private String ip;
+    private String nome;
+    private String id;
+    private int quantity;
     private long lastSeen;
 
-    public IPInfo(String ip, long lastSeen) {
-        this.ip = ip;
+    public StockInfo(String nome, String id, int quantity) {
+        this.nome = nome;
+        this.id = id;
+        this.quantity = quantity;
+    }
+
+    public StockInfo(String id, long lastSeen) {
+        this.id = id;
         this.lastSeen = lastSeen;
     }
 
-    public String getIP () {
-        return this.ip;
+    public String getNome() {
+        return nome;
     }
 
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
     public void setLastSeen(long time){
         this.lastSeen = time;
     }
@@ -66,4 +92,8 @@ class IPInfo {
             result = true;
         return result;
     }
+    String identifier = "banana"; // O identificador que você deseja usar para a banana
+    StockInfo banana = new StockInfo(identifier, 3); // Crie um objeto StockInfo para a banana
+
+
 }

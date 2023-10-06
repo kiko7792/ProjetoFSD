@@ -41,10 +41,10 @@ public class GetStockRequestHandler {
             String metodo = tokens.nextToken();
             if (metodo.equals("get")) {
                 response = "101\n";
-                String ip = tokens.nextToken();
-                Vector<String> ipList = stock.getStock(ip);
-                response += ipList.size() + "\n";
-                for (Iterator<String> it = ipList.iterator(); it.hasNext();){
+                String id = tokens.nextToken();
+                Vector<String> stockList = stock.getStock(id);
+                response += stockList.size() + "\n";
+                for (Iterator<String> it = stockList.iterator(); it.hasNext();){
                     String next = it.next();
                     response += next + ";";
                 }

@@ -50,7 +50,7 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.StockServer">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.projetofsd.Main" />
       <module name="ProjetoFSD" />
@@ -64,8 +64,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="StockServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.projetofsd.StockServer" />
+      <module name="ProjetoFSD" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.projetofsd.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.StockServer" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -79,7 +93,7 @@
       <option name="presentableId" value="Default" />
       <updated>1696512530617</updated>
       <workItem from="1696512531668" duration="2191000" />
-      <workItem from="1696600510687" duration="1196000" />
+      <workItem from="1696600510687" duration="4569000" />
     </task>
     <task id="LOCAL-00001" summary="Hello World">
       <option name="closed" value="true" />
@@ -113,7 +127,15 @@
       <option name="project" value="LOCAL" />
       <updated>1696600894637</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Criar Classes">
+      <option name="closed" value="true" />
+      <created>1696601714343</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1696601714343</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
