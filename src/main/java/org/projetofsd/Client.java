@@ -1,19 +1,41 @@
 package org.projetofsd;
 import java.net.*;
 import java.io.*;
-
+import java.util.*;
 public class Client {
-    static final int DEFAULT_PORT = 2000;
+    static final int DEFAULT_PORT = 2001;
     static final String DEFAULT_HOST = "127.0.0.1";
+
+    public static int menu() {
+
+        int selection;
+        Scanner input = new Scanner(System.in);
+
+        /***************************************************/
+        System.out.println("\n************************************************************");
+        System.out.println("*	Autenticação                                             *");
+        System.out.println("**************************************************************   ");
+        System.out.println("*	1 - Obter Informacao do Servico de Tickting disponivel  ");
+        System.out.println("*	2 - Aceder ao servico de Ticketing         ");
+        System.out.println("*	3 - Quit                                                ");
+        System.out.print("?-> ");
+        selection = input.nextInt();
+        return selection;
+    }
 
     public static void main(String[] args) throws IOException {
         String servidor = DEFAULT_HOST;
         int porto = DEFAULT_PORT;
+        Scanner input = new Scanner(System.in);
+        String ipAddress;
+        int porta;
 
-        /*if (args.length != 1) {
-            System.out.println("Erro: use java presencesClient <ip>");
-            System.exit(-1);
-        }*/
+        do {
+            System.out.println("Introduza o endereço IP:");
+            ipAddress = input.nextLine();
+            System.out.println("Introduza a porta:");
+            porta = input.nextInt();
+        } while (!ipAddress.equals("127.0.0.1") && porta != 2001);
 
         // Create a representation of the IP address of the Server: API java.net.InetAddress
         InetAddress serverAddress = InetAddress.getByName("localhost");
@@ -27,10 +49,10 @@ public class Client {
             // Create a java.io.PrintWriter for the Socket; Use java.io.Socket.etOutputStream() to obtain the Socket output stream
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 
-            //String request = "get" + " " + args[0];
+            String request = "get" + " " +ipAddress + " " + porta;
 
             // write the request into the Socket
-            //out.println(request);
+            out.println(request);
 
             // Read the server response - read the data until null
             String msg;
@@ -44,4 +66,5 @@ public class Client {
             System.exit(1);
         }
     }
-}
+    }
+

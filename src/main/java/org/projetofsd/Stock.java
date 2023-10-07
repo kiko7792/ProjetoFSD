@@ -92,8 +92,4 @@ class StockInfo {
             result = true;
         return result;
     }
-    String identifier = "banana"; // O identificador que você deseja usar para a banana
-    StockInfo banana = new StockInfo(identifier, 3); // Crie um objeto StockInfo para a banana
-
-
 }

@@ -5,7 +5,7 @@ import java.net.*;
 import java.io.*;
 
 public class StockServer {
-    static int DEFAULT_PORT=2000;
+    static int DEFAULT_PORT=2001;
 
     public static void main(String[] args) throws IOException {
         int port=DEFAULT_PORT;
