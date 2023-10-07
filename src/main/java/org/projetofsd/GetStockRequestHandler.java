@@ -32,16 +32,17 @@ public class GetStockRequestHandler {
         try {
             System.out.println("Aceitou ligacao de cliente no endereco " + ligacao.getInetAddress() + " na porta " + ligacao.getPort());
 
-            StringBuilder response;
-            response = new StringBuilder("101\n");
+            String response;
+            response = "101\n";
             Hashtable<String, StockInfo> stockList = stock.getStock();
-            response.append(stockList.size()).append("\n");
+            response += stockList.size() + "\n";
 
-            for (Enumeration<String> keys = stockList.keys(); keys.hasMoreElements(); ) {
+            for (Enumeration<String> keys = stockList.keys(); keys.hasMoreElements();) {
                 String key = keys.nextElement();
                 StockInfo stockInfo = stockList.get(key);
 
-                response.append(stock.listStockItems());
+                response += "\nNome do Produto: " + stockInfo.getName() + "\nIdentificador: " + stockInfo.getIdentifier() +
+                        "\nQuantidade em stock: " + stockInfo.getQuantity() + "\n---------------------------";
             }
 
             System.out.println(response);

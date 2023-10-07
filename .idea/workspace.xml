@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb288e0b-ab37-4209-9529-2ffcf7d2e8cf" name="Changes" comment="Autenticação a funcionar">
+    <list default="true" id="eb288e0b-ab37-4209-9529-2ffcf7d2e8cf" name="Changes" comment="Listagem stcoks (duplicada)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/GetStockRequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/GetStockRequestHandler.java" afterDir="false" />
@@ -107,7 +107,7 @@
       <updated>1696512530617</updated>
       <workItem from="1696512531668" duration="2191000" />
       <workItem from="1696600510687" duration="4569000" />
-      <workItem from="1696683816505" duration="7572000" />
+      <workItem from="1696683816505" duration="10077000" />
     </task>
     <task id="LOCAL-00001" summary="Hello World">
       <option name="closed" value="true" />
@@ -165,7 +165,15 @@
       <option name="project" value="LOCAL" />
       <updated>1696687106040</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Listagem stcoks (duplicada)">
+      <option name="closed" value="true" />
+      <created>1696691554892</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1696691554892</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -177,6 +185,7 @@
     <MESSAGE value="Criar Classes" />
     <MESSAGE value="Criar conexão" />
     <MESSAGE value="Autenticação a funcionar" />
-    <option name="LAST_COMMIT_MESSAGE" value="Autenticação a funcionar" />
+    <MESSAGE value="Listagem stcoks (duplicada)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Listagem stcoks (duplicada)" />
   </component>
 </project>

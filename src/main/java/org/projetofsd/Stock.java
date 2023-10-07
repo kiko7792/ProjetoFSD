@@ -18,6 +18,8 @@ public class Stock {
             presentStock.put("Banana" ,banana);
             StockInfo maça = new StockInfo("maça", "345", 20);
             presentStock.put("Maça" ,maça);
+            StockInfo manga = new StockInfo("manga", "344", 20);
+            presentStock.put("Manga" ,manga);
         }
 
         return presentStock;
