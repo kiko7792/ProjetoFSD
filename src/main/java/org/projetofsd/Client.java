@@ -13,11 +13,12 @@ public class Client {
 
         /***************************************************/
         System.out.println("\n************************************************************");
-        System.out.println("*	Autenticação                                             *");
-        System.out.println("**************************************************************   ");
-        System.out.println("*	1 - Obter Informacao do Servico de Tickting disponivel  ");
-        System.out.println("*	2 - Aceder ao servico de Ticketing         ");
-        System.out.println("*	3 - Quit                                                ");
+        System.out.println("*	           Menu Cliente                            *");
+        System.out.println("************************************************************   ");
+        System.out.println("*	1 - Listar Stock ");
+        System.out.println("*	2 - Adicionar Stock        ");
+        System.out.println("*	3 - Retirar Stock        ");
+        System.out.println("*	4 - Quit                                                ");
         System.out.print("?-> ");
         selection = input.nextInt();
         return selection;
@@ -29,19 +30,23 @@ public class Client {
         Scanner input = new Scanner(System.in);
         String ipAddress;
         int porta;
+        System.out.println("\n************************************************************");
+        System.out.println("*	            Autenticação                           *");
+        System.out.println("************************************************************   ");
 
         do {
             System.out.println("Introduza o endereço IP:");
             ipAddress = input.nextLine();
             System.out.println("Introduza a porta:");
             porta = input.nextInt();
+            input.nextLine();
         } while (!ipAddress.equals("127.0.0.1") && porta != 2001);
 
         // Create a representation of the IP address of the Server: API java.net.InetAddress
         InetAddress serverAddress = InetAddress.getByName("localhost");
 
         Socket socket = new Socket(serverAddress, porto);
-
+        menu();
         try {
             // Create a java.io.BufferedReader for the Socket; Use java.io.Socket.getInputStream() to obtain the Socket input stream
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));

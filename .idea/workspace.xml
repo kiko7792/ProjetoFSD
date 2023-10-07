@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb288e0b-ab37-4209-9529-2ffcf7d2e8cf" name="Changes" comment="Criar Classes">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="eb288e0b-ab37-4209-9529-2ffcf7d2e8cf" name="Changes" comment="Criar conexão">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/Stock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/Stock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/StockServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/StockServer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +91,7 @@
       <updated>1696512530617</updated>
       <workItem from="1696512531668" duration="2191000" />
       <workItem from="1696600510687" duration="4569000" />
-      <workItem from="1696683816505" duration="2480000" />
+      <workItem from="1696683816505" duration="3156000" />
     </task>
     <task id="LOCAL-00001" summary="Hello World">
       <option name="closed" value="true" />
@@ -136,7 +133,15 @@
       <option name="project" value="LOCAL" />
       <updated>1696601714343</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Criar conexão">
+      <option name="closed" value="true" />
+      <created>1696686517601</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1696686517601</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -146,6 +151,7 @@
     <MESSAGE value="Hello World" />
     <MESSAGE value="Classes criadas" />
     <MESSAGE value="Criar Classes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Criar Classes" />
+    <MESSAGE value="Criar conexão" />
+    <option name="LAST_COMMIT_MESSAGE" value="Criar conexão" />
   </component>
 </project>
