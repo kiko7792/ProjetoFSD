@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb288e0b-ab37-4209-9529-2ffcf7d2e8cf" name="Changes" comment="Criar conexão">
+    <list default="true" id="eb288e0b-ab37-4209-9529-2ffcf7d2e8cf" name="Changes" comment="Autenticação a funcionar">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/GetStockRequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/GetStockRequestHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/Stock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/Stock.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,6 +63,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Stock" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.projetofsd.Stock" />
+      <module name="ProjetoFSD" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.projetofsd.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="StockServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.projetofsd.StockServer" />
       <module name="ProjetoFSD" />
@@ -77,6 +92,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.StockServer" />
+        <item itemvalue="Application.Stock" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -91,7 +107,7 @@
       <updated>1696512530617</updated>
       <workItem from="1696512531668" duration="2191000" />
       <workItem from="1696600510687" duration="4569000" />
-      <workItem from="1696683816505" duration="3156000" />
+      <workItem from="1696683816505" duration="7572000" />
     </task>
     <task id="LOCAL-00001" summary="Hello World">
       <option name="closed" value="true" />
@@ -141,7 +157,15 @@
       <option name="project" value="LOCAL" />
       <updated>1696686517601</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Autenticação a funcionar">
+      <option name="closed" value="true" />
+      <created>1696687106040</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1696687106040</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -152,6 +176,7 @@
     <MESSAGE value="Classes criadas" />
     <MESSAGE value="Criar Classes" />
     <MESSAGE value="Criar conexão" />
-    <option name="LAST_COMMIT_MESSAGE" value="Criar conexão" />
+    <MESSAGE value="Autenticação a funcionar" />
+    <option name="LAST_COMMIT_MESSAGE" value="Autenticação a funcionar" />
   </component>
 </project>

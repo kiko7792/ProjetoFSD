@@ -40,7 +40,7 @@ public class Client {
             System.out.println("Introduza a porta:");
             porta = input.nextInt();
             input.nextLine();
-        } while (!ipAddress.equals("127.0.0.1") && porta != 2001);
+        } while (!ipAddress.equals("127.0.0.1") || porta != 2001);
 
         // Create a representation of the IP address of the Server: API java.net.InetAddress
         InetAddress serverAddress = InetAddress.getByName("localhost");
@@ -54,7 +54,7 @@ public class Client {
             // Create a java.io.PrintWriter for the Socket; Use java.io.Socket.etOutputStream() to obtain the Socket output stream
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 
-            String request = "get" + " " +ipAddress + " " + porta;
+            String request = "get";
 
             // write the request into the Socket
             out.println(request);

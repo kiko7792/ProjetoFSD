@@ -5,73 +5,80 @@ import java.util.*;
 
 public class Stock {
 
-    private static Hashtable<String, StockInfo> presentStock = new Hashtable<String, StockInfo>();
+    private static Hashtable<String, StockInfo> presentStock = new Hashtable<>();
     private static int cont = 0;
-    public Vector<String> getStock(String identifier) {
+    public Hashtable<String, StockInfo> getStock() {
 
-        long actualTime = new Date().getTime();
         cont = cont+1;
 
         System.out.println("cont = "+ cont);
 
-        //Assume-se que o IP e valido!!!!!
         synchronized(this) {
-            if (presentStock.containsKey(identifier)) {
-                StockInfo newIp = presentStock.get(identifier);
-                newIp.setLastSeen(actualTime);
-            }
-            else {
-                StockInfo newStock = new StockInfo(identifier, actualTime);
-                presentStock.put(identifier,newStock);
-            }
+            StockInfo banana = new StockInfo("banana", "123", 40);
+            presentStock.put("Banana" ,banana);
+            StockInfo maça = new StockInfo("maça", "345", 20);
+            presentStock.put("Maça" ,maça);
         }
-        return getStockList();
+
+        return presentStock;
+
+    }
+    // Método para listar todos os itens em estoque
+    public Object listStockItems() {
+        for (StockInfo info : presentStock.values()) {
+            System.out.println("Nome do Produto: " + info.getName());
+            System.out.println("Identificador: " + info.getIdentifier());
+            System.out.println("Quantidade em stock: " + info.getQuantity());
+            System.out.println("---------------------------");
+        }
+        return null;
     }
 
-    private Vector<String> getStockList(){
+    /*private Vector<String> getStockList(){
         Vector<String> result = new Vector<String>();
         for (Enumeration<StockInfo> e = presentStock.elements(); e.hasMoreElements(); ) {
             StockInfo element = e.nextElement();
             if (!element.timeOutPassed(180*1000)) {
-                result.add(element.getId());
+                result.add(element.getNome());
             }
         }
         return result;
-    }
+    }*/
+
 }
 
 class StockInfo {
 
-    private String nome;
-    private String id;
+    private String name;
+    private String identifier;
     private int quantity;
     private long lastSeen;
 
-    public StockInfo(String nome, String id, int quantity) {
-        this.nome = nome;
-        this.id = id;
+    public StockInfo(String name, String identifier, int quantity) {
+        this.name = name;
+        this.identifier = identifier;
         this.quantity = quantity;
     }
 
-    public StockInfo(String id, long lastSeen) {
+   /* public StockInfo(String id, long lastSeen) {
         this.id = id;
         this.lastSeen = lastSeen;
+    }*/
+
+    public String getName() {
+        return name;
     }
 
-    public String getNome() {
-        return nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public String getIdentifier() {
+        return identifier;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+    public void setId(String identifier) {
+        this.identifier = identifier;
     }
 
     public int getQuantity() {
@@ -92,4 +99,9 @@ class StockInfo {
             result = true;
         return result;
     }
+
+
+
+
+
 }
