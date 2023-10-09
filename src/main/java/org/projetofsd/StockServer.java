@@ -3,6 +3,7 @@ import org.projetofsd.Stock;
 
 import java.net.*;
 import java.io.*;
+import java.util.StringTokenizer;
 
 public class StockServer {
     static int DEFAULT_PORT=2001;
@@ -10,6 +11,7 @@ public class StockServer {
     public static void main(String[] args) throws IOException {
         int port=DEFAULT_PORT;
         Stock stock = new Stock();
+
 
         ServerSocket servidor = null;
 
@@ -22,12 +24,22 @@ public class StockServer {
             try {
 
 // Listen for a connection to be made to the socket and accepts it: API java.net.ServerSocket
+                Socket ligacao = servidor.accept();
 
-                Socket ligaçao = servidor.accept();
+
+
 
 // Start a GetPresencesRequestHandler thread
-                GetStockRequestHandler GSRH = new GetStockRequestHandler(ligaçao, stock);
-                GSRH.start();
+
+                    GetStockRequestHandler gsrh = new GetStockRequestHandler(ligacao, stock);
+                    gsrh.start();
+
+
+
+              //UpdateStockHandler ush = new UpdateStockHandler(ligaçao, stock);
+              //ush.start();
+
+
 
 
             } catch (IOException e) {

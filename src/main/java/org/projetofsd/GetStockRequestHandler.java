@@ -36,14 +36,19 @@ public class GetStockRequestHandler extends Thread {
 
             stock.readStockCSV("Stock.csv");
             String response = "";
+            String msg = in.readLine();
+
+            StringTokenizer tokens = new StringTokenizer(msg);
+            String metodo = tokens.nextToken();
             Hashtable<String, StockInfo> stockList = stock.getStock();
+            if (metodo.equals("get")) {
+                for (Enumeration<String> keys = stockList.keys(); keys.hasMoreElements(); ) {
+                    String key = keys.nextElement();
+                    StockInfo stockInfo = stockList.get(key);
 
-            for (Enumeration<String> keys = stockList.keys(); keys.hasMoreElements(); ) {
-                String key = keys.nextElement();
-                StockInfo stockInfo = stockList.get(key);
-
-                response += "\nNome do Produto: " + stockInfo.getName() + "\nIdentificador: " + stockInfo.getIdentifier() +
-                        "\nQuantidade em stock: " + stockInfo.getQuantity() + "\n---------------------------";
+                    response += "\nNome do Produto: " + stockInfo.getName() + "\nIdentificador: " + stockInfo.getIdentifier() +
+                            "\nQuantidade em stock: " + stockInfo.getQuantity() + "\n---------------------------";
+                }
             }
 
             System.out.println(response);
