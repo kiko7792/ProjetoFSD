@@ -5,7 +5,7 @@ import java.io.*;
 import java.util.*;
 
 public class Client {
-    static final int DEFAULT_PORT = 2001;
+    static final int DEFAULT_PORT = 2000;
     static final String DEFAULT_HOST = "127.0.0.1";
 
     public static int menu() {
@@ -27,6 +27,16 @@ public class Client {
     }
 
     public static void main(String[] args) throws IOException {
+
+       //Pedir ip e porta do server
+        if (args.length < 2) {
+            System.out.println("Uso: java Client <IP_do_Servidor> <Porta_do_Servidor>");
+            System.exit(1);
+        }
+        //introduzir ip e porta do server
+        String servidors = args[0];
+        int portos = Integer.parseInt(args[1]);
+
         String servidor = DEFAULT_HOST;
         int porto = DEFAULT_PORT;
         Scanner input = new Scanner(System.in);
@@ -36,7 +46,7 @@ public class Client {
         System.out.println("*	            Autenticação                           *");
         System.out.println("************************************************************   ");
 
-        do {
+     /*   do {
             System.out.println("Introduza o endereço IP:");
             ipAddress = input.nextLine();
             System.out.println("Introduza a porta:");
@@ -44,7 +54,7 @@ public class Client {
             input.nextLine();
         } while (!ipAddress.equals("127.0.0.1") || porta != 2001);
 
-
+*/
         int selection;
         do {
 
@@ -54,15 +64,15 @@ public class Client {
                 case 1:
                     // O usuário selecionou a opção "1" para listar o estoque
                     try {
-                        InetAddress serverAddress = InetAddress.getByName("localhost");
-
-                        Socket socket = new Socket(serverAddress, porto);
+                        InetAddress serverAddress = InetAddress.getByName(servidors);
+                        Socket ligacao = null;
+                        ligacao = new Socket(serverAddress, portos);
 
                         // Create a java.io.BufferedReader for the Socket; Use java.io.Socket.getInputStream() to obtain the Socket input stream
-                        BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                        BufferedReader in = new BufferedReader(new InputStreamReader(ligacao.getInputStream()));
 
                         // Create a java.io.PrintWriter for the Socket; Use java.io.Socket.etOutputStream() to obtain the Socket output stream
-                        PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+                        PrintWriter out = new PrintWriter(ligacao.getOutputStream(), true);
 
                         String request = "get";
 
@@ -75,7 +85,7 @@ public class Client {
                             System.out.println(msg);
                         }
                         // Para encerrar a thread
-                        socket.close();
+                        ligacao.close();
 
                     } catch (IOException e) {
                         System.out.println("Erro ao comunicar com o servidor: " + e);

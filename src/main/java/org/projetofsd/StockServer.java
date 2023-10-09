@@ -6,9 +6,10 @@ import java.io.*;
 import java.util.StringTokenizer;
 
 public class StockServer {
-    static int DEFAULT_PORT=2001;
+    static int DEFAULT_PORT=2000;
 
     public static void main(String[] args) throws IOException {
+
         int port=DEFAULT_PORT;
         Stock stock = new Stock();
 
