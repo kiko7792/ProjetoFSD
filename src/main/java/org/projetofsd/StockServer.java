@@ -14,7 +14,7 @@ public class StockServer {
         ServerSocket servidor = null;
 
 // Create a server socket, bound to the specified port: API java.net.ServerSocket
-        ServerSocket welcomeSocket = new ServerSocket(port);
+        servidor = new ServerSocket(port);
 
         System.out.println("Servidor a' espera de ligacoes no porto " + port);
 
@@ -23,11 +23,11 @@ public class StockServer {
 
 // Listen for a connection to be made to the socket and accepts it: API java.net.ServerSocket
 
-                Socket socketPedido = welcomeSocket.accept();
+                Socket ligaçao = servidor.accept();
 
 // Start a GetPresencesRequestHandler thread
-                GetStockRequestHandler GPRH = new GetStockRequestHandler(socketPedido, stock);
-                GPRH.run();
+                GetStockRequestHandler GSRH = new GetStockRequestHandler(ligaçao, stock);
+                GSRH.start();
 
 
             } catch (IOException e) {

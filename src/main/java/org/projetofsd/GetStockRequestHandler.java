@@ -9,11 +9,13 @@ import java.util.Enumeration;
 import java.util.*;
 
 
-public class GetStockRequestHandler {
+public class GetStockRequestHandler extends Thread {
     Socket ligacao;
     Stock stock;
     BufferedReader in;
     PrintWriter out;
+
+
 
     public GetStockRequestHandler(Socket ligacao, Stock stock) {
         this.ligacao = ligacao;
@@ -32,12 +34,11 @@ public class GetStockRequestHandler {
         try {
             System.out.println("Aceitou ligacao de cliente no endereco " + ligacao.getInetAddress() + " na porta " + ligacao.getPort());
 
-            String response;
-            response = "101\n";
+            stock.readStockCSV("Stock.csv");
+            String response = "";
             Hashtable<String, StockInfo> stockList = stock.getStock();
-            response += stockList.size() + "\n";
 
-            for (Enumeration<String> keys = stockList.keys(); keys.hasMoreElements();) {
+            for (Enumeration<String> keys = stockList.keys(); keys.hasMoreElements(); ) {
                 String key = keys.nextElement();
                 StockInfo stockInfo = stockList.get(key);
 
@@ -53,10 +54,11 @@ public class GetStockRequestHandler {
             out.close();
             ligacao.close();
 
-        } catch (IOException e) {
-            System.out.println("Erro na execucao do servidor: " + e);
+        }catch (IOException e){
+            System.out.println("Erro na execução do servidor: " + e);
             System.exit(1);
         }
+
     }
 }
 

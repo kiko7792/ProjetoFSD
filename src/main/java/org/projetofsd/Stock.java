@@ -1,5 +1,6 @@
 package org.projetofsd;
 
+import java.io.*;
 import java.util.*;
 
 
@@ -7,45 +8,76 @@ public class Stock {
 
     private static Hashtable<String, StockInfo> presentStock = new Hashtable<>();
     private static int cont = 0;
+
     public Hashtable<String, StockInfo> getStock() {
 
-        cont = cont+1;
+        cont = cont + 1;
 
-        System.out.println("cont = "+ cont);
-
-        synchronized(this) {
-            StockInfo banana = new StockInfo("banana", "123", 40);
-            presentStock.put("Banana" ,banana);
-            StockInfo maça = new StockInfo("maça", "345", 20);
-            presentStock.put("Maça" ,maça);
-            StockInfo manga = new StockInfo("manga", "344", 20);
-            presentStock.put("Manga" ,manga);
-        }
+        System.out.println("cont = " + cont);
 
         return presentStock;
 
     }
+
     // Método para listar todos os itens em estoque
-    public Object listStockItems() {
+    public String listStockItems() {
         for (StockInfo info : presentStock.values()) {
-            System.out.println("Nome do Produto: " + info.getName());
-            System.out.println("Identificador: " + info.getIdentifier());
-            System.out.println("Quantidade em stock: " + info.getQuantity());
-            System.out.println("---------------------------");
+            System.out.println("Nome do Produto: " + info.getName() + "\nIdentificador: " + info.getIdentifier() +
+                    "\nQuantidade em stock: " + info.getQuantity() + "\n---------------------------");
         }
-        return null;
+        return "";
     }
 
-    /*private Vector<String> getStockList(){
-        Vector<String> result = new Vector<String>();
-        for (Enumeration<StockInfo> e = presentStock.elements(); e.hasMoreElements(); ) {
-            StockInfo element = e.nextElement();
-            if (!element.timeOutPassed(180*1000)) {
-                result.add(element.getNome());
+    public void saveStockCSV(String nomeArquivo) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(nomeArquivo))) {
+            // Escreve o cabeçalho do CSV, se necessário
+            writer.println("Nome do Produto,Identificador,Quantidade");
+
+            // Itera sobre os dados do stock e escreve cada linha no CSV
+            for (Enumeration<String> keys = presentStock.keys(); keys.hasMoreElements(); ) {
+                String key = keys.nextElement();
+                StockInfo stockInfo = presentStock.get(key);
+
+                writer.println(stockInfo.getName() + "," + stockInfo.getIdentifier() + "," + stockInfo.getQuantity());
             }
+
+            System.out.println("Stock salvo em " + nomeArquivo);
+        } catch (IOException e) {
+            System.err.println("Erro ao salvar o stock em CSV: " + e.getMessage());
         }
-        return result;
-    }*/
+    }
+
+    public void readStockCSV(String nomeArquivo) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(nomeArquivo))) {
+            // Salta a primeira linha, que é o cabeçalho do CSV
+            String linha;
+            reader.readLine();
+
+            while ((linha = reader.readLine()) != null) {
+                String[] partes = linha.split(",");
+                if (partes.length == 3) {
+                    String nome = partes[0];
+                    String identificador = partes[1];
+                    int quantidade = Integer.parseInt(partes[2]);
+
+                    // Atualize o estoque com os dados lidos
+                    StockInfo stockInfo = new StockInfo(nome, identificador, quantidade);
+                    presentStock.put(identificador, stockInfo);
+                }
+            }
+
+            System.out.println("Stock lido de " + nomeArquivo);
+        } catch (IOException e) {
+            System.err.println("Erro ao ler o stock de CSV: " + e.getMessage());
+        }
+    }
+
+
+
+
+
+
+
 
 }
 
