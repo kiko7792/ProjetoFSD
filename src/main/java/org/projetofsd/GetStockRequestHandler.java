@@ -14,12 +14,13 @@ public class GetStockRequestHandler extends Thread {
     Stock stock;
     BufferedReader in;
     PrintWriter out;
+    String request;
 
 
-
-    public GetStockRequestHandler(Socket ligacao, Stock stock) {
+    public GetStockRequestHandler(Socket ligacao, Stock stock, String request) {
         this.ligacao = ligacao;
         this.stock = stock;
+        this.request = request;
         try {
             this.in = new BufferedReader(new InputStreamReader(ligacao.getInputStream()));
 
@@ -38,7 +39,7 @@ public class GetStockRequestHandler extends Thread {
 
                 stock.readStockCSV("Stock.csv");
                 String response = "";
-                String msg = in.readLine();
+                String msg = request;
 
                 StringTokenizer tokens = new StringTokenizer(msg);
                 String metodo = tokens.nextToken();

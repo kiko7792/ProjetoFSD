@@ -32,12 +32,25 @@ public class StockServer {
 
 // Start a GetPresencesRequestHandler thread
 
-                   GetStockRequestHandler gsrh = new GetStockRequestHandler(ligacao, stock);
-                   gsrh.start();
+                BufferedReader in = new BufferedReader(new InputStreamReader(ligacao.getInputStream()));
+                String request = in.readLine();
+                String msg = request;
 
-
-                   //UpdateStockHandler ush = new UpdateStockHandler(ligacao, stock);
-                   //ush.start();
+                StringTokenizer tokens = new StringTokenizer(msg);
+                String metodo = tokens.nextToken();
+                if (request != null) {
+                    if (request.equals("get")) {
+                        GetStockRequestHandler gsrh = new GetStockRequestHandler(ligacao, stock, request);
+                        gsrh.start();
+                    } else if (metodo.equals("update")) {
+                        // Create an UpdateStockHandler thread
+                        UpdateStockHandler ush = new UpdateStockHandler(ligacao, stock, request);
+                        ush.start();
+                    } else {
+                        // Handle unknown requests or provide an error response
+                        // ...
+                    }
+                }
 
 
 

@@ -12,10 +12,12 @@ public class UpdateStockHandler extends Thread {
     Stock stock;
     BufferedReader in;
     PrintWriter out;
+    String request;
 
-    public UpdateStockHandler(Socket ligacao, Stock stock) {
+    public UpdateStockHandler(Socket ligacao, Stock stock, String request) {
         this.ligacao = ligacao;
         this.stock = stock;
+        this.request = request;
         try {
             this.in = new BufferedReader(new InputStreamReader(ligacao.getInputStream()));
             this.out = new PrintWriter(ligacao.getOutputStream());
@@ -32,7 +34,7 @@ public class UpdateStockHandler extends Thread {
 
 
                 stock.readStockCSV("Stock.csv");
-                String msg = in.readLine();
+                String msg = request;
                 StringTokenizer tokens = new StringTokenizer(msg);
                 String metodo = tokens.nextToken();
 

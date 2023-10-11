@@ -8,7 +8,9 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Stock.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Stock.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/GetStockRequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/GetStockRequestHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/StockServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/StockServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/UpdateStockHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/UpdateStockHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -136,7 +138,8 @@
       <workItem from="1696886966742" duration="6643000" />
       <workItem from="1696934605666" duration="297000" />
       <workItem from="1696952311635" duration="668000" />
-      <workItem from="1696972486044" duration="14059000" />
+      <workItem from="1696972486044" duration="14078000" />
+      <workItem from="1697016659763" duration="1924000" />
     </task>
     <task id="LOCAL-00001" summary="Hello World">
       <option name="closed" value="true" />
@@ -225,7 +228,15 @@
       <option name="project" value="LOCAL" />
       <updated>1696986505732</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Atualizar quantidade de produtos done. Falta conseguir ter as threads synchronized para conseguir correr os metodos start() em simultaneo">
+      <option name="closed" value="true" />
+      <created>1696986856189</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1696986856189</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

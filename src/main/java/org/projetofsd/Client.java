@@ -107,7 +107,7 @@ public class Client {
                         // Create a java.io.PrintWriter for the Socket; Use java.io.Socket.etOutputStream() to obtain the Socket output stream
                         PrintWriter out = new PrintWriter(ligacao.getOutputStream(), true);
 
-                        String request = "update " + productIdentifier + " " + quantityChange;
+                        String request = "update" + " " + productIdentifier + " " + quantityChange;
 
                         // write the request into the Socket
                         out.println(request);
