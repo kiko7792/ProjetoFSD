@@ -19,7 +19,7 @@ public class StockServer {
 // Create a server socket, bound to the specified port: API java.net.ServerSocket
         servidor = new ServerSocket(port);
 
-        System.out.println("Servidor a' espera de ligacoes no porto " + port);
+        System.out.println("Servidor à espera de ligacoes no porto " + port);
 
         while(true) {
             try {
@@ -36,8 +36,8 @@ public class StockServer {
                    gsrh.start();
 
 
-                   UpdateStockHandler ush = new UpdateStockHandler(ligacao, stock);
-                   ush.start();
+                   //UpdateStockHandler ush = new UpdateStockHandler(ligacao, stock);
+                   //ush.start();
 
 
 

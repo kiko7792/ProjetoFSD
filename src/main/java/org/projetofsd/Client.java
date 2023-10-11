@@ -17,8 +17,8 @@ public class Client {
         System.out.println("\n************************************************************");
         System.out.println("*	           Menu Cliente                            *");
         System.out.println("************************************************************   ");
-        System.out.println("*	1 - Adicionar Stock ");
-        System.out.println("*	2 - Retirar Stock       ");
+        System.out.println("*	1 - Adicionar/Remover Stock ");
+        System.out.println("*	2 -       ");
         System.out.println("*	3 - Sair       ");
         System.out.print("Selecione uma opção(1-3): ");
         selection = input.nextInt();
@@ -93,7 +93,7 @@ public class Client {
                     // Código para a opção "2" (adicionar stock)
                     System.out.print("Introduza o identificador do produto: ");
                     String productIdentifier = input.next();
-                    System.out.print("Introduza a quantidade a adicionar (nªpositivo) ou a remover (nªnegative): ");
+                    System.out.print("Introduza a quantidade a adicionar (nªpositivo) ou a remover (nªnegativo): ");
                     int quantityChange = input.nextInt();
 
                     try {
