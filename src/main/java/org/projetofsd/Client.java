@@ -8,8 +8,8 @@ public class Client {
     static final int DEFAULT_PORT = 2000;
     static final String DEFAULT_HOST = "127.0.0.1";
 
+    //Menu
     public static int menu() {
-
         int selection;
         Scanner input = new Scanner(System.in);
 
@@ -17,14 +17,20 @@ public class Client {
         System.out.println("\n************************************************************");
         System.out.println("*	           Menu Cliente                            *");
         System.out.println("************************************************************   ");
-        System.out.println("*	1 - Listar Stock ");
-        System.out.println("*	2 - Adicionar Stock        ");
-        System.out.println("*	3 - Retirar Stock        ");
-        System.out.println("*	4 - Quit                                                ");
-        System.out.print("Selecione uma opção(1-4): ");
+        System.out.println("*	1 - Adicionar Stock ");
+        System.out.println("*	2 - Retirar Stock       ");
+        System.out.println("*	3 - Sair       ");
+        System.out.print("Selecione uma opção(1-3): ");
         selection = input.nextInt();
         return selection;
     }
+
+
+
+
+
+
+
 
     public static void main(String[] args) throws IOException {
 
@@ -34,27 +40,49 @@ public class Client {
             System.exit(1);
         }
         //introduzir ip e porta do server
-        String servidors = args[0];
-        int portos = Integer.parseInt(args[1]);
+        String servidor = args[0];
+        int porto = Integer.parseInt(args[1]);
 
-        String servidor = DEFAULT_HOST;
-        int porto = DEFAULT_PORT;
+        //versão exercício pl
+        String servidors = DEFAULT_HOST;
+        int portos = DEFAULT_PORT;
         Scanner input = new Scanner(System.in);
-        String ipAddress;
-        int porta;
-        System.out.println("\n************************************************************");
-        System.out.println("*	            Autenticação                           *");
-        System.out.println("************************************************************   ");
 
-     /*   do {
-            System.out.println("Introduza o endereço IP:");
-            ipAddress = input.nextLine();
-            System.out.println("Introduza a porta:");
-            porta = input.nextInt();
-            input.nextLine();
-        } while (!ipAddress.equals("127.0.0.1") || porta != 2001);
+        //Lista o stock ao iniciar o servidor
+        try {
+            InetAddress serverAddress = InetAddress.getByName(servidor);
+            Socket ligacao = null;
+            ligacao = new Socket(serverAddress, porto);
 
-*/
+
+            System.out.println("\n************************************************************");
+            System.out.println("*	            Autenticação com Sucesso               *");
+            System.out.println("************************************************************   ");
+            // Create a java.io.BufferedReader for the Socket; Use java.io.Socket.getInputStream() to obtain the Socket input stream
+            BufferedReader in = new BufferedReader(new InputStreamReader(ligacao.getInputStream()));
+
+            // Create a java.io.PrintWriter for the Socket; Use java.io.Socket.etOutputStream() to obtain the Socket output stream
+            PrintWriter out = new PrintWriter(ligacao.getOutputStream(), true);
+
+            String request = "get";
+
+            // write the request into the Socket
+            out.println(request);
+
+            // Read the server response - read the data until null
+            String msg;
+            while ((msg = in.readLine()) != null) {
+                System.out.println(msg);
+            }
+            // Para encerrar a thread
+            ligacao.close();
+
+        } catch (IOException e) {
+            System.out.println("Erro ao comunicar com o servidor: " + e);
+            System.exit(1);
+        }
+
+
         int selection;
         do {
 
@@ -62,11 +90,16 @@ public class Client {
 
             switch (selection) {
                 case 1:
-                    // O usuário selecionou a opção "1" para listar o estoque
+                    // Código para a opção "2" (adicionar stock)
+                    System.out.print("Introduza o identificador do produto: ");
+                    String productIdentifier = input.next();
+                    System.out.print("Introduza a quantidade a adicionar (nªpositivo) ou a remover (nªnegative): ");
+                    int quantityChange = input.nextInt();
+
                     try {
-                        InetAddress serverAddress = InetAddress.getByName(servidors);
+                        InetAddress serverAddress = InetAddress.getByName(servidor);
                         Socket ligacao = null;
-                        ligacao = new Socket(serverAddress, portos);
+                        ligacao = new Socket(serverAddress, porto);
 
                         // Create a java.io.BufferedReader for the Socket; Use java.io.Socket.getInputStream() to obtain the Socket input stream
                         BufferedReader in = new BufferedReader(new InputStreamReader(ligacao.getInputStream()));
@@ -74,67 +107,33 @@ public class Client {
                         // Create a java.io.PrintWriter for the Socket; Use java.io.Socket.etOutputStream() to obtain the Socket output stream
                         PrintWriter out = new PrintWriter(ligacao.getOutputStream(), true);
 
-                        String request = "get";
+                        String request = "update " + productIdentifier + " " + quantityChange;
 
                         // write the request into the Socket
                         out.println(request);
 
-                        // Read the server response - read the data until null
-                        String msg;
-                        while ((msg = in.readLine()) != null) {
-                            System.out.println(msg);
-                        }
-                        // Para encerrar a thread
-                        ligacao.close();
+                        // Read the server response
+                        String response = in.readLine();
+                        System.out.println(response);
 
+                        // Close the socket
+                        ligacao.close();
                     } catch (IOException e) {
                         System.out.println("Erro ao comunicar com o servidor: " + e);
                         System.exit(1);
                     }
                     break;
                 case 2:
-                    // Código para a opção "2" (adicionar estoque)
-                    try {
-                        InetAddress serverAddress = InetAddress.getByName("localhost");
-
-                        Socket socket = new Socket(serverAddress, porto);
-
-                        // Create a java.io.BufferedReader for the Socket; Use java.io.Socket.getInputStream() to obtain the Socket input stream
-                        BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-
-                        // Create a java.io.PrintWriter for the Socket; Use java.io.Socket.etOutputStream() to obtain the Socket output stream
-                        PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-
-                        String request = "update";
-
-                        // write the request into the Socket
-                        out.println(request);
-
-                        // Read the server response - read the data until null
-                        String msg;
-                        while ((msg = in.readLine()) != null) {
-                            System.out.println(msg);
-                        }
-                        // Para encerrar a thread
-                        socket.close();
-
-                    } catch (IOException e) {
-                        System.out.println("Erro ao comunicar com o servidor: " + e);
-                        System.exit(1);
-                    }
                     break;
                 case 3:
-                    // Código para a opção "3" (retirar estoque)
-                    // ...
-                    break;
-                case 4:
                     System.out.println("A sair do programa.");
                     break;
+
                 default:
                     System.out.println("Opção inválida. Tente novamente.");
             }
 
-        } while (selection != 4); // Continua exibindo o menu até que o usuário selecione a opção "4" (sair)
+        } while (selection != 3);
     }
 }
 

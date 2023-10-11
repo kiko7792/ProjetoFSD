@@ -31,39 +31,42 @@ public class GetStockRequestHandler extends Thread {
     }
 
     public void run() {
-        try {
-            System.out.println("Aceitou ligacao de cliente no endereco " + ligacao.getInetAddress() + " na porta " + ligacao.getPort());
+        synchronized (this) {
+            try {
+                System.out.println("Aceitou ligacao de cliente no endereco " + ligacao.getInetAddress() + " na porta " + ligacao.getPort());
 
-            stock.readStockCSV("Stock.csv");
-            String response = "";
-            String msg = in.readLine();
 
-            StringTokenizer tokens = new StringTokenizer(msg);
-            String metodo = tokens.nextToken();
-            Hashtable<String, StockInfo> stockList = stock.getStock();
-            if (metodo.equals("get")) {
-                for (Enumeration<String> keys = stockList.keys(); keys.hasMoreElements(); ) {
-                    String key = keys.nextElement();
-                    StockInfo stockInfo = stockList.get(key);
+                stock.readStockCSV("Stock.csv");
+                String response = "";
+                String msg = in.readLine();
 
-                    response += "\nNome do Produto: " + stockInfo.getName() + "\nIdentificador: " + stockInfo.getIdentifier() +
-                            "\nQuantidade em stock: " + stockInfo.getQuantity() + "\n---------------------------";
+                StringTokenizer tokens = new StringTokenizer(msg);
+                String metodo = tokens.nextToken();
+                Hashtable<String, StockInfo> stockList = stock.getStock();
+                if (metodo.equals("get")) {
+                    for (Enumeration<String> keys = stockList.keys(); keys.hasMoreElements(); ) {
+                        String key = keys.nextElement();
+                        StockInfo stockInfo = stockList.get(key);
+
+                        response += "\nNome do Produto: " + stockInfo.getName() + "\nIdentificador: " + stockInfo.getIdentifier() +
+                                "\nQuantidade em stock: " + stockInfo.getQuantity() + "\n---------------------------";
+                    }
                 }
+
+                System.out.println(response);
+                out.println(response);
+
+                out.flush();
+                in.close();
+                out.close();
+                ligacao.close();
+
+            } catch (IOException e) {
+                System.out.println("Erro na execução do servidor: " + e);
+                System.exit(1);
             }
 
-            System.out.println(response);
-            out.println(response);
-
-            out.flush();
-            in.close();
-            out.close();
-            ligacao.close();
-
-        }catch (IOException e){
-            System.out.println("Erro na execução do servidor: " + e);
-            System.exit(1);
         }
-
     }
 }
 

@@ -4,11 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb288e0b-ab37-4209-9529-2ffcf7d2e8cf" name="Changes" comment="Stock em csv">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="eb288e0b-ab37-4209-9529-2ffcf7d2e8cf" name="Changes" comment="Conexão Ip e porta (pcs diferentes)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Stock.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Stock.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/GetStockRequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/GetStockRequestHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/Stock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/Stock.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/StockServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/StockServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/UpdateStockHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/UpdateStockHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,7 +136,10 @@
       <workItem from="1696683816505" duration="10077000" />
       <workItem from="1696864491985" duration="303000" />
       <workItem from="1696886424473" duration="372000" />
-      <workItem from="1696886966742" duration="4464000" />
+      <workItem from="1696886966742" duration="6643000" />
+      <workItem from="1696934605666" duration="297000" />
+      <workItem from="1696952311635" duration="668000" />
+      <workItem from="1696972486044" duration="13359000" />
     </task>
     <task id="LOCAL-00001" summary="Hello World">
       <option name="closed" value="true" />
@@ -206,7 +212,15 @@
       <option name="project" value="LOCAL" />
       <updated>1696863035209</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Conexão Ip e porta (pcs diferentes)">
+      <option name="closed" value="true" />
+      <created>1696891687332</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1696891687332</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -220,6 +234,8 @@
     <MESSAGE value="Autenticação a funcionar" />
     <MESSAGE value="Listagem stcoks (duplicada)" />
     <MESSAGE value="Stock em csv" />
-    <option name="LAST_COMMIT_MESSAGE" value="Stock em csv" />
+    <MESSAGE value="Conexão Ip e porta" />
+    <MESSAGE value="Conexão Ip e porta (pcs diferentes)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Conexão Ip e porta (pcs diferentes)" />
   </component>
 </project>

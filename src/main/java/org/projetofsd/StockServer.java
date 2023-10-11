@@ -12,7 +12,7 @@ public class StockServer {
 
         int port=DEFAULT_PORT;
         Stock stock = new Stock();
-
+        boolean isOption1Selected = false; // Variável de controle
 
         ServerSocket servidor = null;
 
@@ -32,13 +32,12 @@ public class StockServer {
 
 // Start a GetPresencesRequestHandler thread
 
-                    GetStockRequestHandler gsrh = new GetStockRequestHandler(ligacao, stock);
-                    gsrh.start();
+                   GetStockRequestHandler gsrh = new GetStockRequestHandler(ligacao, stock);
+                   gsrh.start();
 
 
-
-              //UpdateStockHandler ush = new UpdateStockHandler(ligaçao, stock);
-              //ush.start();
+                   UpdateStockHandler ush = new UpdateStockHandler(ligacao, stock);
+                   ush.start();
 
 
 

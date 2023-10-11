@@ -5,78 +5,60 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.Enumeration;
-import java.util.*;
+import java.util.StringTokenizer;
 
 public class UpdateStockHandler extends Thread {
-
     Socket ligacao;
     Stock stock;
     BufferedReader in;
     PrintWriter out;
-
 
     public UpdateStockHandler(Socket ligacao, Stock stock) {
         this.ligacao = ligacao;
         this.stock = stock;
         try {
             this.in = new BufferedReader(new InputStreamReader(ligacao.getInputStream()));
-
             this.out = new PrintWriter(ligacao.getOutputStream());
         } catch (IOException e) {
-            System.out.println("Erro na execucao do servidor: " + e);
+            System.out.println("Erro na execução do servidor: " + e);
             System.exit(1);
         }
     }
 
-    public void run(){
-        try{
-            System.out.println("Ligação aceite no endereço" + ligacao.getInetAddress());
+    public synchronized void run() {
+        synchronized (this) {
+            try {
+                System.out.println("Aceitou ligação de cliente no endereço " + ligacao.getInetAddress() + " na porta " + ligacao.getPort());
 
-            stock.readStockCSV("Stock.csv");
-            String response = "";
-            Hashtable<String, StockInfo> stockList = stock.getStock();
 
-            for (Enumeration<String> keys = stockList.keys(); keys.hasMoreElements(); ) {
-                String key = keys.nextElement();
-                StockInfo stockInfo = stockList.get(key);
+                stock.readStockCSV("Stock.csv");
+                String msg = in.readLine();
+                StringTokenizer tokens = new StringTokenizer(msg);
+                String metodo = tokens.nextToken();
 
-                response += "\nNome do Produto: " + stockInfo.getName() + "\nIdentificador: " + stockInfo.getIdentifier() +
-                        "\nQuantidade em stock: " + stockInfo.getQuantity() + "\n---------------------------";
+                if (metodo.equals("update")) {
+                    String productIdentifier = tokens.nextToken();
+                    int quantityChange = Integer.parseInt(tokens.nextToken());
+
+                    // Add or remove stock from the inventory
+                    boolean success = stock.updateStock(productIdentifier, quantityChange);
+
+                    if (success) {
+                        stock.saveStockCSV("Stock.csv");
+                        out.println("Stock updated successfully.");
+                    } else {
+                        out.println("Failed to update stock. Product not found.");
+                    }
+                }
+
+                out.flush();
+                in.close();
+                out.close();
+                ligacao.close();
+            } catch (IOException e) {
+                System.out.println("Erro na execução do servidor: " + e);
+                System.exit(1);
             }
-
-            System.out.println(response);
-            out.println(response);
-
-            out.println("Digite o nome do artigo para alterar a quantidade:");
-
-            String nomeArtigo = in.readLine();
-
-            if (stockList.containsKey(nomeArtigo)) {
-                // Solicitar a quantidade a ser adicionada ou removida
-                out.println("Digite a quantidade a ser adicionada ou removida:");
-
-                int quantity = Integer.parseInt(in.readLine()); // Ler a quantidade do usuário
-
-
-            }
-        }catch (IOException e) {
-            System.out.println("Erro na execução do servidor: " + e);
-            System.exit(1);
         }
-
-
-
-
-
-
-        }
-
-
-
-
-
-
-
-
+    }
 }

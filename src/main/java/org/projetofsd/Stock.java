@@ -28,7 +28,7 @@ public class Stock {
         return "";
     }
 
-    public void saveStockCSV(String nomeArquivo) {
+   /* public void saveStockCSV(String nomeArquivo) {
         try (PrintWriter writer = new PrintWriter(new FileWriter(nomeArquivo))) {
             // Escreve o cabeçalho do CSV, se necessário
             writer.println("Nome do Produto,Identificador,Quantidade");
@@ -45,9 +45,27 @@ public class Stock {
         } catch (IOException e) {
             System.err.println("Erro ao salvar o stock em CSV: " + e.getMessage());
         }
-    }
+    }*/
+   // Method to save stock data to the CSV file
+   public void saveStockCSV(String nomeArquivo) {
+       synchronized (this) {
+           try (PrintWriter writer = new PrintWriter(new FileWriter(nomeArquivo))) {
+               writer.println("Nome do Produto,Identificador,Quantidade");
+
+               for (StockInfo stockInfo : presentStock.values()) {
+                   writer.println(stockInfo.getName() + "," + stockInfo.getIdentifier() + "," + stockInfo.getQuantity());
+               }
+
+               System.out.println("Stock salvo em " + nomeArquivo);
+           } catch (IOException e) {
+               System.err.println("Erro ao salvar o stock em CSV: " + e.getMessage());
+           }
+       }
+   }
 
     public void readStockCSV(String nomeArquivo) {
+
+        synchronized (this){
         try (BufferedReader reader = new BufferedReader(new FileReader(nomeArquivo))) {
             // Salta a primeira linha, que é o cabeçalho do CSV
             String linha;
@@ -71,7 +89,28 @@ public class Stock {
             System.err.println("Erro ao ler o stock de CSV: " + e.getMessage());
         }
     }
+    }
 
+    public boolean updateStock(String productIdentifier, int quantityChange) {
+
+        synchronized (this) {
+            StockInfo stockInfo = null;
+
+            for (StockInfo info : presentStock.values()) {
+                if (info.getIdentifier().equals(productIdentifier)) {
+                    stockInfo = info;
+                    break;
+                }
+            }
+
+            if (stockInfo != null) {
+                stockInfo.updateQty(quantityChange);
+                saveStockCSV("Stock.csv");
+                return true; // Stock updated successfully
+            }
+        }
+        return false; // Product not found
+    }
 
 
 
@@ -134,6 +173,15 @@ class StockInfo {
         return result;
     }
 
+    public void updateQty(int quantityDelta) {
+        // Atualize a quantidade no estoque com o valor delta
+        this.quantity += quantityDelta;
+
+        // Verifique se a quantidade não fica negativa
+        if (this.quantity < 0) {
+            this.quantity = 0;
+        }
+    }
 
 
 
