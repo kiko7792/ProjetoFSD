@@ -49,38 +49,47 @@ public class Client {
         Scanner input = new Scanner(System.in);
 
         //Lista o stock ao iniciar o servidor
-        try {
-            InetAddress serverAddress = InetAddress.getByName(servidor);
-            Socket ligacao = null;
-            ligacao = new Socket(serverAddress, porto);
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                try {
+                    InetAddress serverAddress = InetAddress.getByName(servidor);
+                    Socket ligacao = null;
+                    ligacao = new Socket(serverAddress, porto);
 
 
-            System.out.println("\n************************************************************");
-            System.out.println("*	            Autenticação com Sucesso               *");
-            System.out.println("************************************************************   ");
-            // Create a java.io.BufferedReader for the Socket; Use java.io.Socket.getInputStream() to obtain the Socket input stream
-            BufferedReader in = new BufferedReader(new InputStreamReader(ligacao.getInputStream()));
+                    System.out.println("\n************************************************************");
+                    System.out.println("*	            Autenticação com Sucesso               *");
+                    System.out.println("************************************************************   ");
+                    // Create a java.io.BufferedReader for the Socket; Use java.io.Socket.getInputStream() to obtain the Socket input stream
+                    BufferedReader in = new BufferedReader(new InputStreamReader(ligacao.getInputStream()));
 
-            // Create a java.io.PrintWriter for the Socket; Use java.io.Socket.etOutputStream() to obtain the Socket output stream
-            PrintWriter out = new PrintWriter(ligacao.getOutputStream(), true);
+                    // Create a java.io.PrintWriter for the Socket; Use java.io.Socket.etOutputStream() to obtain the Socket output stream
+                    PrintWriter out = new PrintWriter(ligacao.getOutputStream(), true);
 
-            String request = "get";
+                    String request = "get";
 
-            // write the request into the Socket
-            out.println(request);
+                    // write the request into the Socket
+                    out.println(request);
 
-            // Read the server response - read the data until null
-            String msg;
-            while ((msg = in.readLine()) != null) {
-                System.out.println(msg);
+                    // Read the server response - read the data until null
+                    String msg;
+                    while ((msg = in.readLine()) != null) {
+                        System.out.println(msg);
+                    }
+                    // Para encerrar a thread
+                    ligacao.close();
+
+                } catch (IOException e) {
+                    System.out.println("Erro ao comunicar com o servidor: " + e);
+                    System.exit(1);
+                }
             }
-            // Para encerrar a thread
-            ligacao.close();
+            };
 
-        } catch (IOException e) {
-            System.out.println("Erro ao comunicar com o servidor: " + e);
-            System.exit(1);
-        }
+            // Cria um temporizador que executa a tarefa a cada 5 segundos
+            Timer timer = new Timer();
+        timer.scheduleAtFixedRate(task, 0, 5000);
 
 
         int selection;
@@ -134,6 +143,7 @@ public class Client {
             }
 
         } while (selection != 3);
+        timer.cancel();
     }
 }
 
