@@ -4,10 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb288e0b-ab37-4209-9529-2ffcf7d2e8cf" name="Changes" comment="Atualizar quantidade de produtos done. Falta conseguir ter as threads synchronized para conseguir correr os metodos start() em simultaneo">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stock.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Stock.csv" afterDir="false" />
+    <list default="true" id="eb288e0b-ab37-4209-9529-2ffcf7d2e8cf" name="Changes" comment="A atualizar de 5 em 5 segundos">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/GetStockRequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/GetStockRequestHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/Stock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/Stock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/StockServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/StockServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/UpdateStockHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/UpdateStockHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,6 +97,7 @@
     <configuration name="StockServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.projetofsd.StockServer" />
       <module name="ProjetoFSD" />
+      <option name="PROGRAM_PARAMETERS" value="3000" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="org.projetofsd.*" />
@@ -137,7 +141,9 @@
       <workItem from="1696952311635" duration="668000" />
       <workItem from="1696972486044" duration="14078000" />
       <workItem from="1697016659763" duration="1924000" />
-      <workItem from="1697112615840" duration="299000" />
+      <workItem from="1697112615840" duration="378000" />
+      <workItem from="1697132324656" duration="527000" />
+      <workItem from="1697213309294" duration="8176000" />
     </task>
     <task id="LOCAL-00001" summary="Hello World">
       <option name="closed" value="true" />
@@ -234,7 +240,15 @@
       <option name="project" value="LOCAL" />
       <updated>1696986856189</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="A atualizar de 5 em 5 segundos">
+      <option name="closed" value="true" />
+      <created>1697112984698</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1697112984698</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -252,6 +266,7 @@
     <MESSAGE value="Conexão Ip e porta (pcs diferentes)" />
     <MESSAGE value="Atualizar quantidade de produtos done. Falta conseguir ter as threads synchronized para conseguir correr os metodos start()" />
     <MESSAGE value="Atualizar quantidade de produtos done. Falta conseguir ter as threads synchronized para conseguir correr os metodos start() em simultaneo" />
-    <option name="LAST_COMMIT_MESSAGE" value="Atualizar quantidade de produtos done. Falta conseguir ter as threads synchronized para conseguir correr os metodos start() em simultaneo" />
+    <MESSAGE value="A atualizar de 5 em 5 segundos" />
+    <option name="LAST_COMMIT_MESSAGE" value="A atualizar de 5 em 5 segundos" />
   </component>
 </project>

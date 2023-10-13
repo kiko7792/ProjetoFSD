@@ -1,5 +1,4 @@
 package org.projetofsd;
-import org.projetofsd.Stock;
 
 import java.net.*;
 import java.io.*;
@@ -10,53 +9,49 @@ public class StockServer {
 
     public static void main(String[] args) throws IOException {
 
-        int port=DEFAULT_PORT;
-        Stock stock = new Stock();
-        boolean isOption1Selected = false; // Variável de controle
+        int port = DEFAULT_PORT; // Usar o valor padrão se não for fornecido como argumento
 
-        ServerSocket servidor = null;
+        if (args.length >= 1) {
+            port = Integer.parseInt(args[0]); // Usar o valor fornecido como argumento
+        }
+
+        Stock stock = new Stock();
+
+        ServerSocket server = null;
 
 // Create a server socket, bound to the specified port: API java.net.ServerSocket
-        servidor = new ServerSocket(port);
+        server = new ServerSocket(port);
 
-        System.out.println("Servidor à espera de ligacoes no porto " + port);
+        System.out.println("Servidor à espera de ligações no porto " + port);
 
         while(true) {
             try {
 
 // Listen for a connection to be made to the socket and accepts it: API java.net.ServerSocket
-                Socket ligacao = servidor.accept();
+                Socket connection = server.accept();
 
 
+// Start a GetStockRequestRequestHandler and UpdateStoockHandler thread
 
-
-// Start a GetPresencesRequestHandler thread
-
-                BufferedReader in = new BufferedReader(new InputStreamReader(ligacao.getInputStream()));
+                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 String request = in.readLine();
                 String msg = request;
 
                 StringTokenizer tokens = new StringTokenizer(msg);
                 String metodo = tokens.nextToken();
                 if (request != null) {
-                    if (request.equals("get")) {
-                        GetStockRequestHandler gsrh = new GetStockRequestHandler(ligacao, stock, request);
+                    if (request.equals("STOCK_REQUEST")) {
+                        GetStockRequestHandler gsrh = new GetStockRequestHandler(connection, stock, request);
                         gsrh.start();
-                    } else if (metodo.equals("update")) {
-                        // Create an UpdateStockHandler thread
-                        UpdateStockHandler ush = new UpdateStockHandler(ligacao, stock, request);
+                    } else if (metodo.equals("STOCK_UPDATE")) {
+                        UpdateStockHandler ush = new UpdateStockHandler(connection, stock, request);
                         ush.start();
-                    } else {
-                        // Handle unknown requests or provide an error response
-                        // ...
                     }
                 }
 
 
-
-
             } catch (IOException e) {
-                System.out.println("Erro na execucao do servidor: "+e);
+                System.out.println("STOCK_ERROR: "+e);
                 System.exit(1);
             }
 
