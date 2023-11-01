@@ -2,10 +2,16 @@ package org.projetofsd;
 
 import java.net.*;
 import java.io.*;
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
 import java.util.StringTokenizer;
+import java.lang.SecurityManager;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
 
 public class StockServer {
-    static int DEFAULT_PORT=2000;
+    static int DEFAULT_PORT = 2000;
 
     public static void main(String[] args) throws IOException {
 
@@ -24,7 +30,7 @@ public class StockServer {
 
         System.out.println("Servidor à espera de ligações no porto " + port);
 
-        while(true) {
+        while (true) {
             try {
 
 // Listen for a connection to be made to the socket and accepts it: API java.net.ServerSocket
@@ -51,10 +57,31 @@ public class StockServer {
 
 
             } catch (IOException e) {
-                System.out.println("STOCK_ERROR: "+e);
+                System.out.println("STOCK_ERROR: " + e);
                 System.exit(1);
             }
 
+        }
+    }
+    String SERVICE_NAME = "/StockServer";
+
+    private void bindRMI (Stock stock) throws RemoteException {
+
+        System.getProperties().put("java.security.policy", "./server.policy");
+
+        if (System.getSecurityManager() == null) {
+            System.setSecurityManager(new SecurityManager());
+        }
+
+        try {
+            LocateRegistry.createRegistry(1099);
+        } catch (RemoteException e) {
+
+        }
+        try {
+            LocateRegistry.getRegistry("127.0.0.1", 1099).rebind(SERVICE_NAME, (Remote) stock);
+        } catch (RemoteException e) {
+            System.out.println("Registry not found");
         }
     }
 }

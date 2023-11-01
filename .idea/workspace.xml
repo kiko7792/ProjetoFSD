@@ -5,12 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="eb288e0b-ab37-4209-9529-2ffcf7d2e8cf" name="Changes" comment="A atualizar de 5 em 5 segundos">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/ClientRMI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/StockServerInterface.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/server.policy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_09_10_2023,_13_57_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_09_10_2023__13_57__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/GetStockRequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/GetStockRequestHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/Stock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/Stock.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/StockServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/StockServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/UpdateStockHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/UpdateStockHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +22,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -41,19 +43,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/kiko/IdeaProjects/ProjetoFSD&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/home/kiko/Ficha 2 FSD/Exercicio-java-rmi-src",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Application.StockServer">
     <configuration name="Client" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.projetofsd.Client" />
@@ -144,6 +146,8 @@
       <workItem from="1697112615840" duration="378000" />
       <workItem from="1697132324656" duration="527000" />
       <workItem from="1697213309294" duration="8176000" />
+      <workItem from="1698852768645" duration="47000" />
+      <workItem from="1698852820272" duration="1189000" />
     </task>
     <task id="LOCAL-00001" summary="Hello World">
       <option name="closed" value="true" />
