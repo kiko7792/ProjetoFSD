@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb288e0b-ab37-4209-9529-2ffcf7d2e8cf" name="Changes" comment="A atualizar de 5 em 5 segundos">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/ClientRMI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/StockServerInterface.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/server.policy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_09_10_2023,_13_57_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_09_10_2023__13_57__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/StockServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/StockServer.java" afterDir="false" />
-    </list>
+    <list default="true" id="eb288e0b-ab37-4209-9529-2ffcf7d2e8cf" name="Changes" comment="Cenas para 2 fase" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -147,7 +139,7 @@
       <workItem from="1697132324656" duration="527000" />
       <workItem from="1697213309294" duration="8176000" />
       <workItem from="1698852768645" duration="47000" />
-      <workItem from="1698852820272" duration="1189000" />
+      <workItem from="1698852820272" duration="1231000" />
     </task>
     <task id="LOCAL-00001" summary="Hello World">
       <option name="closed" value="true" />
@@ -252,7 +244,15 @@
       <option name="project" value="LOCAL" />
       <updated>1697112984698</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Cenas para 2 fase">
+      <option name="closed" value="true" />
+      <created>1698854036595</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1698854036595</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -271,6 +271,7 @@
     <MESSAGE value="Atualizar quantidade de produtos done. Falta conseguir ter as threads synchronized para conseguir correr os metodos start()" />
     <MESSAGE value="Atualizar quantidade de produtos done. Falta conseguir ter as threads synchronized para conseguir correr os metodos start() em simultaneo" />
     <MESSAGE value="A atualizar de 5 em 5 segundos" />
-    <option name="LAST_COMMIT_MESSAGE" value="A atualizar de 5 em 5 segundos" />
+    <MESSAGE value="Cenas para 2 fase" />
+    <option name="LAST_COMMIT_MESSAGE" value="Cenas para 2 fase" />
   </component>
 </project>
