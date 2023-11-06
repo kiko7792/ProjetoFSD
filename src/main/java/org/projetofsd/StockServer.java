@@ -84,4 +84,17 @@ public class StockServer {
             System.out.println("Registry not found");
         }
     }
+    public void createStock() {
+
+        Stock stock = null;
+        stock = new Stock();
+
+        try {
+            bindRMI(stock);
+        } catch (RemoteException e1) {
+            System.err.println("erro ao registar o stub...");
+            e1.printStackTrace();
+        }
+
+    }
 }
