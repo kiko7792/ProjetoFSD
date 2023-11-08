@@ -8,8 +8,9 @@ import java.net.Socket;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.StringTokenizer;
+import java.io.Serializable;
 
-public class UpdateStockHandler extends Thread {
+public class UpdateStockHandler extends Thread implements Serializable{
     Socket socket;
     Stock stock;
     BufferedReader in;

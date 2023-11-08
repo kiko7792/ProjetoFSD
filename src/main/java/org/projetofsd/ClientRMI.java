@@ -1,6 +1,7 @@
 package org.projetofsd;
 
 import java.rmi.registry.LocateRegistry;
+import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Vector;
@@ -23,11 +24,15 @@ public class ClientRMI {
 
             StockInterface stock = (StockInterface) LocateRegistry.getRegistry(args[1]).lookup(SERVICE_NAME);
 
-            Hashtable<String, StockInfo> stockList = stock.getStock();
-
-            for (String key : stockList.keySet()) {
+            Hashtable<String, StockInfo> stockList = stock.getStockRMI();
+            stock.readStockCSVRMI("Stock.csv");
+            for (Enumeration<String> keys = stockList.keys(); keys.hasMoreElements(); ) {
+                String key = keys.nextElement();
                 StockInfo stockInfo = stockList.get(key);
-                System.out.println("Key: " + key + ", Value: " + stockInfo);
+
+              String stock_response = "\nNome do Produto: " + stockInfo.getName() + "\nIdentificador: " + stockInfo.getIdentifier() +
+                        "\nQuantidade em stock: " + stockInfo.getQuantity() + "\n---------------------------";
+              System.out.println(stock_response);
             }
         } catch (Exception e) {
             System.err.println("Error");

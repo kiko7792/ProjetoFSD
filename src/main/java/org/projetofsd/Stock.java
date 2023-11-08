@@ -1,10 +1,11 @@
 package org.projetofsd;
 
 import java.io.*;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.*;
+import java.rmi.RemoteException;
 
-
-public class Stock {
+public class Stock extends UnicastRemoteObject implements StockInterface, Serializable{
 
     private static Hashtable<String, StockInfo> presentStock = new Hashtable<>();
 
@@ -14,7 +15,16 @@ public class Stock {
 
     }
 
-   //Metodo para salvar no csv
+    @Override
+    public Hashtable<String, StockInfo> getStockRMI() throws RemoteException {
+        return presentStock;
+    }
+
+    public Stock() throws RemoteException{
+        super();
+    }
+
+    //Metodo para salvar no csv
    public void saveStockCSV(String filename) {
        synchronized (this) {
            try (PrintWriter writer = new PrintWriter(new FileWriter(filename))) {
@@ -29,6 +39,23 @@ public class Stock {
            }
        }
    }
+
+    @Override
+    public void saveStockCSVRMI(String filename) throws RemoteException {
+        synchronized (this) {
+            try (PrintWriter writer = new PrintWriter(new FileWriter(filename))) {
+                writer.println("Nome do Produto,Identificador,Quantidade");
+
+                for (StockInfo stockInfo : presentStock.values()) {
+                    writer.println(stockInfo.getName() + "," + stockInfo.getIdentifier() + "," + stockInfo.getQuantity());
+                }
+
+            } catch (IOException e) {
+                System.err.println("Erro ao salvar o stock em CSV: " + e.getMessage());
+                throw new RemoteException("Erro ao salvar o stock em CSV", e);
+            }
+        }
+    }
 
     public void readStockCSV(String filename) {
 
@@ -55,6 +82,32 @@ public class Stock {
         }
     }
     }
+    @Override
+    public void readStockCSVRMI(String filename) throws RemoteException {
+        synchronized (this) {
+            try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+                // Salta a primeira linha, que é o cabeçalho do CSV
+                String linha;
+                reader.readLine();
+
+                while ((linha = reader.readLine()) != null) {
+                    String[] partes = linha.split(",");
+                    if (partes.length == 3) {
+                        String nome = partes[0];
+                        String identificador = partes[1];
+                        int quantidade = Integer.parseInt(partes[2]);
+
+                        // Atualiza o stock com os dados lidos
+                        StockInfo stockInfo = new StockInfo(nome, identificador, quantidade);
+                        presentStock.put(identificador, stockInfo);
+                    }
+                }
+            } catch (IOException e) {
+                System.err.println("Erro ao ler o stock de CSV: " + e.getMessage());
+                throw new RemoteException("Erro ao ler o stock de CSV", e);
+            }
+        }
+    }
 
     public boolean updateStock(String productIdentifier, int quantityChange) {
 
@@ -76,7 +129,19 @@ public class Stock {
         }
         return false; // Product not found
     }
+    @Override
+    public boolean updateStockRMI(String productIdentifier, int quantityChange) throws RemoteException {
+        synchronized (this) {
+            StockInfo stockInfo = presentStock.get(productIdentifier);
 
+            if (stockInfo != null) {
+                stockInfo.updateQty(quantityChange);
+                saveStockCSV("Stock.csv");
+                return true; // Stock updated successfully
+            }
+        }
+        return false; // Product not found
+    }
 
 }
 

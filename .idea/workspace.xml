@@ -5,11 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="eb288e0b-ab37-4209-9529-2ffcf7d2e8cf" name="Changes" comment="cenas">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/ClientAppRMI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/ServerApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/serializable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/ClientRMI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/ClientRMI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/GetStockRequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/GetStockRequestHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/ServerApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/ServerApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/Stock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/Stock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/StockInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/StockInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/StockServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/StockServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/UpdateStockHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/UpdateStockHandler.java" afterDir="false" />
+    </list>
+    <list id="24557854-9598-4da7-ab5f-6926437e61d1" name="Changes by miguelmiranda" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/ClientRMI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/ClientRMI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,13 +27,23 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="LineStatusTrackerManager">
+    <file path="$PROJECT_DIR$/src/main/java/org/projetofsd/ClientRMI.java">
+      <ranges>
+        <range start1="3" end1="3" start2="3" end2="4" changelist="eb288e0b-ab37-4209-9529-2ffcf7d2e8cf" />
+        <range start1="15" end1="15" start2="16" end2="17" changelist="24557854-9598-4da7-ab5f-6926437e61d1" />
+        <range start1="25" end1="28" start2="27" end2="31" changelist="eb288e0b-ab37-4209-9529-2ffcf7d2e8cf" />
+        <range start1="29" end1="30" start2="32" end2="36" changelist="eb288e0b-ab37-4209-9529-2ffcf7d2e8cf" />
+      </ranges>
+    </file>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -46,6 +64,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
     "last_opened_file_path": "/home/kiko/Ficha 2 FSD/Exercicio-java-rmi-src",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -57,7 +76,12 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="org.projetofsd" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.ClientAppRMI">
     <configuration name="Client" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.projetofsd.Client" />
       <module name="ProjetoFSD" />
@@ -74,7 +98,7 @@
     <configuration name="ClientAppRMI" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.projetofsd.ClientAppRMI" />
       <module name="ProjetoFSD" />
-      <option name="PROGRAM_PARAMETERS" value="127.0.0.1 3000" />
+      <option name="PROGRAM_PARAMETERS" value="127.0.0.1 1099" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="org.projetofsd.*" />
@@ -114,7 +138,7 @@
     <configuration name="StockServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.projetofsd.StockServer" />
       <module name="ProjetoFSD" />
-      <option name="PROGRAM_PARAMETERS" value="3000" />
+      <option name="PROGRAM_PARAMETERS" value="1099" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="org.projetofsd.*" />
@@ -165,7 +189,8 @@
       <workItem from="1698852768645" duration="47000" />
       <workItem from="1698852820272" duration="1231000" />
       <workItem from="1699287177034" duration="2011000" />
-      <workItem from="1699289206833" duration="953000" />
+      <workItem from="1699289206833" duration="1471000" />
+      <workItem from="1699396346741" duration="6852000" />
     </task>
     <task id="LOCAL-00001" summary="Hello World">
       <option name="closed" value="true" />
@@ -294,7 +319,15 @@
       <option name="project" value="LOCAL" />
       <updated>1699289177717</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="cenas">
+      <option name="closed" value="true" />
+      <created>1699290298161</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1699290298161</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

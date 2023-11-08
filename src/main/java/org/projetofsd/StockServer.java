@@ -7,10 +7,8 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.util.StringTokenizer;
 import java.lang.SecurityManager;
-import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
 
-public class StockServer {
+public class StockServer implements Serializable {
     static int DEFAULT_PORT = 2000;
 
     public static void main(String[] args) throws IOException {
@@ -63,7 +61,7 @@ public class StockServer {
 
         }
     }
-    String SERVICE_NAME = "/StockServer";
+    String SERVICE_NAME="/StockServer";
 
     private void bindRMI (Stock stock) throws RemoteException {
 
@@ -84,7 +82,7 @@ public class StockServer {
             System.out.println("Registry not found");
         }
     }
-    public void createStock() {
+    public void createStock() throws RemoteException {
 
         Stock stock = null;
         stock = new Stock();
