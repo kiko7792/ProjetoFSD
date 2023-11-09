@@ -40,11 +40,11 @@ public class GetStockRequestHandler extends Thread implements Serializable {
 
                 StringTokenizer tokens = new StringTokenizer(msg);
                 String metodo = tokens.nextToken();
-                Hashtable<String, StockInfo> stockList = stock.getStock();
+                Hashtable<String, Stock.StockInfo> stockList = stock.getStock();
                 if (metodo.equals("STOCK_REQUEST")) {
                     for (Enumeration<String> keys = stockList.keys(); keys.hasMoreElements(); ) {
                         String key = keys.nextElement();
-                        StockInfo stockInfo = stockList.get(key);
+                        Stock.StockInfo stockInfo = stockList.get(key);
 
                         stock_response += "\nNome do Produto: " + stockInfo.getName() + "\nIdentificador: " + stockInfo.getIdentifier() +
                                 "\nQuantidade em stock: " + stockInfo.getQuantity() + "\n---------------------------";

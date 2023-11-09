@@ -17,7 +17,7 @@ public class StockServer implements Serializable {
 
     private void bindRMI() throws RemoteException {
 
-      //  System.getProperties().put("java.security.policy", "./server.policy");
+        //  System.getProperties().put("java.security.policy", "./server.policy");
 
      /*   if (System.getSecurityManager() == null) {
             System.setSecurityManager(new SecurityManager());
@@ -53,9 +53,11 @@ public class StockServer implements Serializable {
         ServerSocket serverSocket = null;
 
 // Create a server socket, bound to the specified port: API java.net.ServerSocket
-        server = new ServerSocket(port);
+        serverSocket = new ServerSocket(portSocket);
 
-        System.out.println("Servidor à espera de ligações no porto " + port);
+        System.out.println("Servidor à espera de ligações no porto " + portSocket+"(Sockets)"+ " & "+ portRMI + "(RMI)");
+
+        server.bindRMI();
 
         while (true) {
             try {
@@ -64,7 +66,7 @@ public class StockServer implements Serializable {
                 Socket connection = serverSocket.accept();
 
 
-// Start a GetStockRequestRequestHandler and UpdateStoockHandler thread
+// Start a GetStockRequestRequestHandler and UpdateStockHandler thread
 
                 BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 String request = in.readLine();
@@ -87,7 +89,6 @@ public class StockServer implements Serializable {
                 System.out.println("STOCK_ERROR: " + e);
                 System.exit(1);
             }
-
         }
 
     }
@@ -100,7 +101,7 @@ public class StockServer implements Serializable {
         stock = new Stock();
 
         try {
-            bindRMI(stock);
+            bindRMI();
         } catch (RemoteException e1) {
             System.err.println("erro ao registar o stub...");
             e1.printStackTrace();

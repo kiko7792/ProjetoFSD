@@ -7,7 +7,7 @@ import java.rmi.RemoteException;
 
 public class Stock extends UnicastRemoteObject implements StockInterface, Serializable{
 
-    private static Hashtable<String, StockInfo> presentStock = new Hashtable<>();
+    public static Hashtable<String, StockInfo> presentStock = new Hashtable<>();
 
     public Hashtable<String, StockInfo> getStock() {
 
@@ -25,45 +25,45 @@ public class Stock extends UnicastRemoteObject implements StockInterface, Serial
     }
 
     //Metodo para salvar no csv
-   public void saveStockCSV(String filename) {
-       synchronized (this) {
-           try (PrintWriter writer = new PrintWriter(new FileWriter(filename))) {
-               writer.println("Nome do Produto,Identificador,Quantidade");
+    public void saveStockCSV(String filename) {
+        synchronized (this) {
+            try (PrintWriter writer = new PrintWriter(new FileWriter(filename))) {
+                writer.println("Nome do Produto,Identificador,Quantidade");
 
-               for (StockInfo stockInfo : presentStock.values()) {
-                   writer.println(stockInfo.getName() + "," + stockInfo.getIdentifier() + "," + stockInfo.getQuantity());
-               }
+                for (StockInfo stockInfo : presentStock.values()) {
+                    writer.println(stockInfo.getName() + "," + stockInfo.getIdentifier() + "," + stockInfo.getQuantity());
+                }
 
-           } catch (IOException e) {
-               System.err.println("Erro ao salvar o stock em CSV: " + e.getMessage());
-           }
-       }
-   }
+            } catch (IOException e) {
+                System.err.println("Erro ao salvar o stock em CSV: " + e.getMessage());
+            }
+        }
+    }
 
     public void readStockCSV(String filename) {
 
         synchronized (this){
-        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
-            // Salta a primeira linha, que é o cabeçalho do CSV
-            String linha;
-            reader.readLine();
+            try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+                // Salta a primeira linha, que é o cabeçalho do CSV
+                String linha;
+                reader.readLine();
 
-            while ((linha = reader.readLine()) != null) {
-                String[] partes = linha.split(",");
-                if (partes.length == 3) {
-                    String nome = partes[0];
-                    String identificador = partes[1];
-                    int quantidade = Integer.parseInt(partes[2]);
+                while ((linha = reader.readLine()) != null) {
+                    String[] partes = linha.split(",");
+                    if (partes.length == 3) {
+                        String nome = partes[0];
+                        String identificador = partes[1];
+                        int quantidade = Integer.parseInt(partes[2]);
 
-                    // Atualiza o stock com os dados lidos
-                    StockInfo stockInfo = new StockInfo(nome, identificador, quantidade);
-                    presentStock.put(identificador, stockInfo);
+                        // Atualiza o stock com os dados lidos
+                        StockInfo stockInfo = new StockInfo(nome, identificador, quantidade);
+                        presentStock.put(identificador, stockInfo);
+                    }
                 }
+            } catch (IOException e) {
+                System.err.println("Erro ao ler o stock de CSV: " + e.getMessage());
             }
-        } catch (IOException e) {
-            System.err.println("Erro ao ler o stock de CSV: " + e.getMessage());
         }
-    }
     }
 
     public boolean updateStock(String productIdentifier, int quantityChange) {
@@ -89,49 +89,50 @@ public class Stock extends UnicastRemoteObject implements StockInterface, Serial
 
     static class StockInfo {
 
-    private String name;
-    private String identifier;
-    private int quantity;
+        private String name;
+        private String identifier;
+        private int quantity;
 
-    public StockInfo(String name, String identifier, int quantity) {
-        this.name = name;
-        this.identifier = identifier;
-        this.quantity = quantity;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getIdentifier() {
-        return identifier;
-    }
-
-    public void setId(String identifier) {
-        this.identifier = identifier;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-
-    public void updateQty(int quantity) {
-        // Atualize a quantidade
-        this.quantity += quantity;
-
-        // Verificar se a quantidade não fica negativa
-        if (this.quantity < 0) {
-            this.quantity = 0;
+        public StockInfo(String name, String identifier, int quantity) {
+            this.name = name;
+            this.identifier = identifier;
+            this.quantity = quantity;
         }
-    }
 
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getIdentifier() {
+            return identifier;
+        }
+
+        public void setId(String identifier) {
+            this.identifier = identifier;
+        }
+
+        public int getQuantity() {
+            return quantity;
+        }
+
+        public void setQuantity(int quantity) {
+            this.quantity = quantity;
+        }
+
+
+        public void updateQty(int quantity) {
+            // Atualize a quantidade
+            this.quantity += quantity;
+
+            // Verificar se a quantidade não fica negativa
+            if (this.quantity < 0) {
+                this.quantity = 0;
+            }
+        }
+
+    }
 }

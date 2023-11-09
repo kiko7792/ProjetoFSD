@@ -27,7 +27,7 @@ public class Client {
 
     public static void main(String[] args) throws IOException {
 
-       //Pedir ip e porta do server
+        //Pedir ip e porta do server
         if (args.length < 2) {
             System.out.println("Uso: java Client <IP_do_Servidor> <Porta_do_Servidor>");
             System.exit(1);
@@ -41,7 +41,7 @@ public class Client {
         int portos = DEFAULT_PORT;
         Scanner input = new Scanner(System.in);
         System.out.println("\n************************************************************");
-        System.out.println("*	            Autenticação com Sucesso               *");
+        System.out.println("*	            Connectado com Sucesso               *");
         System.out.println("************************************************************   ");
         //Lista o stock ao iniciar o servidor
         TimerTask task = new TimerTask() {
@@ -78,9 +78,9 @@ public class Client {
                     System.exit(1);
                 }
             }
-            };
-            // Cria um temporizador que executa a tarefa a cada 5 segundos
-            Timer timer = new Timer();
+        };
+        // Cria um temporizador que executa a tarefa a cada 5 segundos
+        Timer timer = new Timer();
         timer.scheduleAtFixedRate(task, 0, 10000);
 
 

@@ -41,7 +41,7 @@ public class UpdateStockHandler extends Thread implements Serializable{
                 String msg = request;
                 StringTokenizer tokens = new StringTokenizer(msg);
                 String metodo = tokens.nextToken();
-                Hashtable<String, StockInfo> stockList = stock.getStock();
+                Hashtable<String, Stock.StockInfo> stockList = stock.getStock();
                 if (metodo.equals("STOCK_UPDATE")) {
                     String productIdentifier = tokens.nextToken();
                     int quantityChange = Integer.parseInt(tokens.nextToken());
@@ -56,7 +56,7 @@ public class UpdateStockHandler extends Thread implements Serializable{
 
                         for (Enumeration<String> keys = stockList.keys(); keys.hasMoreElements(); ) {
                             String key = keys.nextElement();
-                            StockInfo stockInfo = stockList.get(key);
+                            Stock.StockInfo stockInfo = stockList.get(key);
 
                             stock_response += "\nNome do Produto: " + stockInfo.getName() + "\nIdentificador: " + stockInfo.getIdentifier() +
                                     "\nQuantidade em stock: " + stockInfo.getQuantity() + "\n---------------------------";
