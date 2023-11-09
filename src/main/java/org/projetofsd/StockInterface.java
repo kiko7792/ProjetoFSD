@@ -6,11 +6,6 @@ import java.util.Hashtable;
 
 public interface StockInterface extends Remote {
 
-    Hashtable<String, StockInfo> getStockRMI() throws RemoteException;
+    Hashtable<String, Stock.StockInfo> getStockRMI() throws RemoteException;
 
-    void saveStockCSVRMI(String filename) throws RemoteException;
-
-    void readStockCSVRMI(String filename) throws RemoteException;
-
-    boolean updateStockRMI(String productIdentifier, int quantityChange) throws RemoteException;
 }

@@ -5,23 +5,52 @@ import java.io.*;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.util.StringTokenizer;
 import java.lang.SecurityManager;
 
 public class StockServer implements Serializable {
-    static int DEFAULT_PORT = 2000;
+    static int DEFAULT_PORTSocket = 2000;
+    static int DEFAULT_PORTRMI = 1099;
+    int portRMI;
+    int portSocket;
+
+    private void bindRMI() throws RemoteException {
+
+      //  System.getProperties().put("java.security.policy", "./server.policy");
+
+     /*   if (System.getSecurityManager() == null) {
+            System.setSecurityManager(new SecurityManager());
+        }*/
+
+        try {
+            StockServerInterface stockServer = new StockServerImpl();
+            Registry registry = LocateRegistry.createRegistry(portRMI);
+
+            registry.rebind(SERVICE_NAME, stockServer);
+            System.out.println("Registry created");
+        } catch (RemoteException e) {
+            System.out.println("Registry not found");
+        }
+    }
 
     public static void main(String[] args) throws IOException {
 
-        int port = DEFAULT_PORT; // Usar o valor padrão se não for fornecido como argumento
-
-        if (args.length >= 1) {
-            port = Integer.parseInt(args[0]); // Usar o valor fornecido como argumento
+        if (args.length < 2) {
+            System.out.println("Uso: java StockServer <Porta Socket> <Porta RMI>");
+            System.exit(1);
         }
+
+        int portSocket = Integer.parseInt(args[0]);
+        int portRMI = Integer.parseInt(args[1]);
+
+        StockServer server = new StockServer();
+        server.portSocket = portSocket;
+        server.portRMI = portRMI;
 
         Stock stock = new Stock();
 
-        ServerSocket server = null;
+        ServerSocket serverSocket = null;
 
 // Create a server socket, bound to the specified port: API java.net.ServerSocket
         server = new ServerSocket(port);
@@ -32,7 +61,7 @@ public class StockServer implements Serializable {
             try {
 
 // Listen for a connection to be made to the socket and accepts it: API java.net.ServerSocket
-                Socket connection = server.accept();
+                Socket connection = serverSocket.accept();
 
 
 // Start a GetStockRequestRequestHandler and UpdateStoockHandler thread
@@ -60,28 +89,11 @@ public class StockServer implements Serializable {
             }
 
         }
+
     }
     String SERVICE_NAME="/StockServer";
 
-    private void bindRMI (Stock stock) throws RemoteException {
 
-        System.getProperties().put("java.security.policy", "./server.policy");
-
-        if (System.getSecurityManager() == null) {
-            System.setSecurityManager(new SecurityManager());
-        }
-
-        try {
-            LocateRegistry.createRegistry(1099);
-        } catch (RemoteException e) {
-
-        }
-        try {
-            LocateRegistry.getRegistry("127.0.0.1", 1099).rebind(SERVICE_NAME, (Remote) stock);
-        } catch (RemoteException e) {
-            System.out.println("Registry not found");
-        }
-    }
     public void createStock() throws RemoteException {
 
         Stock stock = null;
