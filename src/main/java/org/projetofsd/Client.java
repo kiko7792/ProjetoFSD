@@ -41,7 +41,7 @@ public class Client {
         int portos = DEFAULT_PORT;
         Scanner input = new Scanner(System.in);
         System.out.println("\n************************************************************");
-        System.out.println("*	            Connectado com Sucesso               *");
+        System.out.println("*	             Conectado com Sucesso                *");
         System.out.println("************************************************************   ");
         //Lista o stock ao iniciar o servidor
         TimerTask task = new TimerTask() {
