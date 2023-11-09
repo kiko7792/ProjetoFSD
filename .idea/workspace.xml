@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb288e0b-ab37-4209-9529-2ffcf7d2e8cf" name="Changes" comment="1st attempt">
+    <list default="true" id="eb288e0b-ab37-4209-9529-2ffcf7d2e8cf" name="Changes" comment="4st attempt">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Stock.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Stock.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/ClientRMI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/ClientRMI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/DirectNotificationImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/DirectNotificationImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/DirectNotificationInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/DirectNotificationInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/StockServerImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/StockServerImpl.java" afterDir="false" />
     </list>
     <list id="24557854-9598-4da7-ab5f-6926437e61d1" name="Changes by miguelmiranda" comment="" />
@@ -125,7 +123,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Client" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="Client" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.projetofsd.Client" />
       <module name="ProjetoFSD" />
       <option name="PROGRAM_PARAMETERS" value="10.8.0.7 2000" />
@@ -142,7 +140,7 @@
     <configuration name="ClientAppRMI" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.projetofsd.ClientAppRMI" />
       <module name="ProjetoFSD" />
-      <option name="PROGRAM_PARAMETERS" value="127.0.0.1 1099" />
+      <option name="PROGRAM_PARAMETERS" value="10.8.0.3 1099" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="org.projetofsd.*" />
@@ -203,7 +201,6 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Client" />
         <item itemvalue="Application.Stock" />
         <item itemvalue="Application.Main" />
       </list>
@@ -244,7 +241,7 @@
       <workItem from="1699495111809" duration="7000" />
       <workItem from="1699495134000" duration="9856000" />
       <workItem from="1699545366749" duration="2252000" />
-      <workItem from="1699547993389" duration="521000" />
+      <workItem from="1699547993389" duration="3384000" />
     </task>
     <task id="LOCAL-00001" summary="Hello World">
       <option name="closed" value="true" />
@@ -424,7 +421,14 @@
       <option name="project" value="LOCAL" />
       <updated>1699545319619</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="4st attempt">
+      <created>1699548667357</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1699548667357</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -462,6 +466,7 @@
     <MESSAGE value="SOMOS MUITO FODAS CARALHO" />
     <MESSAGE value="SOMOS MUITO MUITO FODAS CARALHO" />
     <MESSAGE value="1st attempt" />
-    <option name="LAST_COMMIT_MESSAGE" value="1st attempt" />
+    <MESSAGE value="4st attempt" />
+    <option name="LAST_COMMIT_MESSAGE" value="4st attempt" />
   </component>
 </project>

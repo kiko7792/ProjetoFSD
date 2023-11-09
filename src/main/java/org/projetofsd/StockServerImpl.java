@@ -9,7 +9,6 @@ import java.util.List;
 
 public class StockServerImpl extends UnicastRemoteObject implements StockServerInterface{
     private final List<DirectNotificationInterface> subscribers;
-    int n;
     public StockServerImpl() throws RemoteException {
         subscribers = new ArrayList<>();
     }

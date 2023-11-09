@@ -22,11 +22,18 @@ public class ClientRMI {
         }
 
         try {
+            DirectNotificationInterface directNotifications = new DirectNotificationImpl();
+
+
             Registry registry = LocateRegistry.getRegistry(args[0], Integer.parseInt(args[1]));
 
             StockServerInterface stockServer = (StockServerInterface) registry.lookup(SERVICE_NAME);
+            //UnicastRemoteObject.exportObject(directNotifications,0);
+
+            stockServer.subscribe(directNotifications);
+
             System.out.println("Aceitou ligacao de cliente no endereco " + args[0] + " na porta " + args[1]);
-            // Agora você pode chamar os métodos remotos, como listar o estoque e atualizar a quantidade.
+
 
             System.out.println("\n************************************************************");
             System.out.println("*	               Conectado com Sucesso                  *");
@@ -44,12 +51,6 @@ public class ClientRMI {
                 System.out.print("Selecione uma opção(1-3): ");
                 int escolha = scanner.nextInt();
 
-                try {
-                    DirectNotificationInterface directNotifications = new DirectNotificationImpl();
-                    stockServer.subscribe(directNotifications);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
 
                 if (escolha == 1) {
                     // Listar o stock
