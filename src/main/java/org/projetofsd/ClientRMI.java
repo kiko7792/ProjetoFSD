@@ -34,14 +34,6 @@ public class ClientRMI {
 
             Scanner scanner = new Scanner(System.in);
 
-            try {
-                DirectNotificationInterface directNotifications = new DirectNotificationImpl();
-                stockServer.subscribe(directNotifications);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-
             while (true) {
                 System.out.println("\n************************************************************");
                 System.out.println("*	                Menu Cliente RMI                      *");
@@ -51,6 +43,13 @@ public class ClientRMI {
                 System.out.println("*	3 - Sair      ");
                 System.out.print("Selecione uma opção(1-3): ");
                 int escolha = scanner.nextInt();
+
+                try {
+                    DirectNotificationInterface directNotifications = new DirectNotificationImpl();
+                    stockServer.subscribe(directNotifications);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
                 if (escolha == 1) {
                     // Listar o stock

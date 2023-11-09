@@ -9,8 +9,7 @@ public class DirectNotificationImpl extends UnicastRemoteObject implements Direc
 
     }
     @Override
-    public String notifyStockUpdate(String message) throws RemoteException {
+    public void notifyStockUpdate(String message) throws RemoteException {
         System.out.println(message);
-        return message;
     }
 }

@@ -9,9 +9,12 @@ import java.util.List;
 
 public class StockServerImpl extends UnicastRemoteObject implements StockServerInterface{
     private final List<DirectNotificationInterface> subscribers;
-    protected StockServerImpl() throws RemoteException {
+    int n;
+    public StockServerImpl() throws RemoteException {
         subscribers = new ArrayList<>();
     }
+
+
     @Override
     public void saveStockCSVRMI(String filename) throws RemoteException {
         synchronized (this) {
