@@ -8,7 +8,7 @@ import java.util.List;
 
 
 public class StockServerImpl extends UnicastRemoteObject implements StockServerInterface{
-    private List<DirectNotificationInterface> subscribers;
+    private final List<DirectNotificationInterface> subscribers;
     protected StockServerImpl() throws RemoteException {
         subscribers = new ArrayList<>();
     }
@@ -98,7 +98,7 @@ public class StockServerImpl extends UnicastRemoteObject implements StockServerI
             System.out.println("STOCK_UPDATED");
             String stock = "\nSTOCK_UPDATED\n";
             stock += stock_request();
-            notifySubscribers("Stock updated by user: /n" + stock_request());
+            notifySubscribers("Stock updated by user: \n" + stock_request());
             return stock;
 
         }else{

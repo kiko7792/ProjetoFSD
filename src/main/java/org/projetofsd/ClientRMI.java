@@ -35,7 +35,7 @@ public class ClientRMI {
             Scanner scanner = new Scanner(System.in);
 
             try {
-            DirectNotificationInterface directNotifications = new DirectNotificationImpl();
+                DirectNotificationInterface directNotifications = new DirectNotificationImpl();
                 stockServer.subscribe(directNotifications);
             } catch (Exception e) {
                 e.printStackTrace();

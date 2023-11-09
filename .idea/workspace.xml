@@ -4,15 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb288e0b-ab37-4209-9529-2ffcf7d2e8cf" name="Changes" comment="SOMOS MUITO MUITO FODAS CARALHO">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/DirectNotificationImpl.java" afterDir="false" />
+    <list default="true" id="eb288e0b-ab37-4209-9529-2ffcf7d2e8cf" name="Changes" comment="1st attempt">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Stock.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Stock.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/ClientRMI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/ClientRMI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/DirectNotification.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/DirectNotificationInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/DirectNotificationInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/DirectNotificationImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/DirectNotificationImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/StockServerImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/StockServerImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/StockServerInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/StockServerInterface.java" afterDir="false" />
     </list>
     <list id="24557854-9598-4da7-ab5f-6926437e61d1" name="Changes by miguelmiranda" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -113,7 +110,7 @@
     </key>
   </component>
   <component name="RunManager" selected="Application.ClientAppRMI">
-    <configuration name="Client (2)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="Client (2)" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.projetofsd.Client" />
       <module name="ProjetoFSD" />
       <option name="PROGRAM_PARAMETERS" value="127.0.0.1 1099" />
@@ -144,7 +141,7 @@
     <configuration name="ClientAppRMI" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.projetofsd.ClientAppRMI" />
       <module name="ProjetoFSD" />
-      <option name="PROGRAM_PARAMETERS" value="127.0.0.1 1099" />
+      <option name="PROGRAM_PARAMETERS" value="10.8.0.3 1099" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="org.projetofsd.*" />
@@ -206,7 +203,6 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Client" />
-        <item itemvalue="Application.Client (2)" />
         <item itemvalue="Application.Stock" />
         <item itemvalue="Application.Main" />
       </list>
@@ -245,7 +241,7 @@
       <workItem from="1699468715436" duration="16381000" />
       <workItem from="1699493540948" duration="1384000" />
       <workItem from="1699495111809" duration="7000" />
-      <workItem from="1699495134000" duration="8833000" />
+      <workItem from="1699495134000" duration="9747000" />
     </task>
     <task id="LOCAL-00001" summary="Hello World">
       <option name="closed" value="true" />
@@ -411,7 +407,14 @@
       <option name="project" value="LOCAL" />
       <updated>1699498150716</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="1st attempt">
+      <created>1699544518501</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1699544518501</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -448,7 +451,8 @@
     <MESSAGE value="Java RMI connection&#10;Stock_request com RMI&#10;Stock_update com RMI&#10;&#10;&#10;SOMOS FODAS CARALHO" />
     <MESSAGE value="SOMOS MUITO FODAS CARALHO" />
     <MESSAGE value="SOMOS MUITO MUITO FODAS CARALHO" />
-    <option name="LAST_COMMIT_MESSAGE" value="SOMOS MUITO MUITO FODAS CARALHO" />
+    <MESSAGE value="1st attempt" />
+    <option name="LAST_COMMIT_MESSAGE" value="1st attempt" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
