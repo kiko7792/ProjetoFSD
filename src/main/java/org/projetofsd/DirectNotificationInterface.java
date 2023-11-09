@@ -2,6 +2,6 @@ package org.projetofsd;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-public interface DirectNotificationInterface {
-    String Stock_updated(String message) throws RemoteException;
+public interface DirectNotificationInterface extends Remote {
+    String notifyStockUpdate(String message) throws RemoteException;
 }

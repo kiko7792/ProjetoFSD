@@ -2,6 +2,7 @@ package org.projetofsd;
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
 import java.sql.SQLOutput;
 import java.util.Scanner;
 
@@ -28,14 +29,22 @@ public class ClientRMI {
             // Agora você pode chamar os métodos remotos, como listar o estoque e atualizar a quantidade.
 
             System.out.println("\n************************************************************");
-            System.out.println("*	            Connectado com Sucesso               *");
+            System.out.println("*	               Conectado com Sucesso                  *");
             System.out.println("************************************************************   ");
 
             Scanner scanner = new Scanner(System.in);
 
+            try {
+            DirectNotificationInterface directNotifications = new DirectNotificationImpl();
+                stockServer.subscribe(directNotifications);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
             while (true) {
                 System.out.println("\n************************************************************");
-                System.out.println("*	           Menu Cliente RMI                           *");
+                System.out.println("*	                Menu Cliente RMI                      *");
                 System.out.println("************************************************************   ");
                 System.out.println("*	1 - Listar Stock ");
                 System.out.println("*	2 - Adicionar/Remover Stock ");

@@ -3,10 +3,14 @@ package org.projetofsd;
 import java.io.*;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class StockServerImpl extends UnicastRemoteObject implements StockServerInterface{
+    private List<DirectNotificationInterface> subscribers;
     protected StockServerImpl() throws RemoteException {
+        subscribers = new ArrayList<>();
     }
     @Override
     public void saveStockCSVRMI(String filename) throws RemoteException {
@@ -50,6 +54,12 @@ public class StockServerImpl extends UnicastRemoteObject implements StockServerI
             }
         }
     }
+
+    @Override
+    public void subscribe(DirectNotificationInterface directNotification) throws RemoteException {
+        subscribers.add(directNotification);
+    }
+
     @Override
     public boolean updateStockRMI(String productIdentifier, int quantityChange) throws RemoteException {
         synchronized (this) {
@@ -88,11 +98,19 @@ public class StockServerImpl extends UnicastRemoteObject implements StockServerI
             System.out.println("STOCK_UPDATED");
             String stock = "\nSTOCK_UPDATED\n";
             stock += stock_request();
+            notifySubscribers("Stock updated by user: /n" + stock_request());
             return stock;
 
         }else{
-            String error = "STOCK_ERROR";
-            return error;
+            return "STOCK_ERROR";
         }
     }
+
+    private void notifySubscribers(String message) throws RemoteException {
+        for (DirectNotificationInterface directNotification : subscribers) {
+            directNotification.notifyStockUpdate(message);
+        }
+    }
+
+
 }
