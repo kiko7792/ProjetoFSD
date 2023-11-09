@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb288e0b-ab37-4209-9529-2ffcf7d2e8cf" name="Changes" comment="Java RMI connection&#10;Stock_request com RMI&#10;Stock_update com RMI&#10;&#10;&#10;SOMOS FODAS CARALHO">
+    <list default="true" id="eb288e0b-ab37-4209-9529-2ffcf7d2e8cf" name="Changes" comment="SOMOS MUITO FODAS CARALHO">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/StockServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/StockServer.java" afterDir="false" />
     </list>
     <list id="24557854-9598-4da7-ab5f-6926437e61d1" name="Changes by miguelmiranda" comment="" />
@@ -240,7 +239,7 @@
       <workItem from="1699468715436" duration="16381000" />
       <workItem from="1699493540948" duration="1384000" />
       <workItem from="1699495111809" duration="7000" />
-      <workItem from="1699495134000" duration="2025000" />
+      <workItem from="1699495134000" duration="2775000" />
     </task>
     <task id="LOCAL-00001" summary="Hello World">
       <option name="closed" value="true" />
@@ -392,7 +391,14 @@
       <option name="project" value="LOCAL" />
       <updated>1699494333267</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="SOMOS MUITO FODAS CARALHO">
+      <created>1699497670417</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1699497670417</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -427,6 +433,7 @@
     <MESSAGE value="cenas" />
     <MESSAGE value="cen" />
     <MESSAGE value="Java RMI connection&#10;Stock_request com RMI&#10;Stock_update com RMI&#10;&#10;&#10;SOMOS FODAS CARALHO" />
-    <option name="LAST_COMMIT_MESSAGE" value="Java RMI connection&#10;Stock_request com RMI&#10;Stock_update com RMI&#10;&#10;&#10;SOMOS FODAS CARALHO" />
+    <MESSAGE value="SOMOS MUITO FODAS CARALHO" />
+    <option name="LAST_COMMIT_MESSAGE" value="SOMOS MUITO FODAS CARALHO" />
   </component>
 </project>

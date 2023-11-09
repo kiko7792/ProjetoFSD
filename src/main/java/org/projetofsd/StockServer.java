@@ -25,11 +25,10 @@ public class StockServer implements Serializable {
 
         try {
             StockServerInterface stockServer = new StockServerImpl();
-            Registry registry = LocateRegistry.createRegistry(portRMI);
+            LocateRegistry.createRegistry(portRMI);
 
             LocateRegistry.getRegistry("127.0.0.1",portRMI).rebind(SERVICE_NAME, stockServer);
 
-            //registry.rebind(SERVICE_NAME, stockServer);
             System.out.println("Registry created");
         } catch (RemoteException e) {
             System.out.println("Registry not found");
