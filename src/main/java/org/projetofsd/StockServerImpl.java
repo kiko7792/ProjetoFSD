@@ -63,17 +63,29 @@ public class StockServerImpl extends UnicastRemoteObject implements StockServerI
     }
 
     @Override
-    public boolean updateStockRMI(String productIdentifier, int quantityChange) throws RemoteException {
+    public int updateStockRMI(String productIdentifier, int quantityChange) throws RemoteException {
         synchronized (this) {
-            Stock.StockInfo stockInfo = Stock.presentStock.get(productIdentifier);
+            Stock.StockInfo stockInfo = null;
 
-            if (stockInfo != null) {
-                stockInfo.updateQty(quantityChange);
+            for (Stock.StockInfo info : Stock.presentStock.values()) {
+                if (info.getIdentifier().equals(productIdentifier)) {
+                    stockInfo = info;
+                    break;
+                }
+            }
+            int a = 0;
+            if( stockInfo != null) {
+                a = stockInfo.updateQty(quantityChange);
+            }
+
+            if (stockInfo != null && a == 1) {
                 saveStockCSVRMI("Stock.csv");
-                return true; // Stock updated successfully
+                return 1; // Stock updated successfully
+            } else if (a == -1 || a == 0) {
+                return -1; // Stock failed to update
             }
         }
-        return false; // Product not found
+        return 0; // Product not found
     }
     @Override
     public String stock_request() throws RemoteException {
@@ -94,13 +106,13 @@ public class StockServerImpl extends UnicastRemoteObject implements StockServerI
     @Override
     public String stock_update(String id, int qty) throws RemoteException {
 
-        boolean success = updateStockRMI(id, qty);
+        int success = updateStockRMI(id, qty);
 
-        if(success){
+        if(success == 1){
             System.out.println("STOCK_UPDATED");
             String stock = "\nSTOCK_UPDATED\n";
             stock += stock_request();
-            notifySubscribers("Stock updated by user: \n" + stock_request());
+            notifySubscribers("\nStock updated by user: \n" + stock_request());
             return stock;
 
         }else{

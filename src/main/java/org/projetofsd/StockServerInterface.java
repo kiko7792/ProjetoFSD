@@ -8,7 +8,7 @@ public interface StockServerInterface extends Remote {
 
     void readStockCSVRMI(String filename) throws RemoteException;
     void subscribe(DirectNotificationInterface directNotification) throws RemoteException;
-    boolean updateStockRMI(String productIdentifier, int quantityChange) throws RemoteException;
+    int updateStockRMI(String productIdentifier, int quantityChange) throws RemoteException;
 
 
     String stock_request() throws RemoteException;

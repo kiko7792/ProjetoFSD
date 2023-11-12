@@ -66,7 +66,7 @@ public class Stock extends UnicastRemoteObject implements StockInterface, Serial
         }
     }
 
-    public boolean updateStock(String productIdentifier, int quantityChange) {
+    public int updateStock(String productIdentifier, int quantityChange) {
 
         synchronized (this) {
             StockInfo stockInfo = null;
@@ -77,14 +77,16 @@ public class Stock extends UnicastRemoteObject implements StockInterface, Serial
                     break;
                 }
             }
-
-            if (stockInfo != null) {
-                stockInfo.updateQty(quantityChange);
+            int a = stockInfo.updateQty(quantityChange);
+            
+            if (stockInfo != null && a == 1) {
                 saveStockCSV("Stock.csv");
-                return true; // Stock updated successfully
+                return 1; // Stock updated successfully
+            } else if (a == -1 || a == 0) {
+                 return -1;
             }
         }
-        return false; // Product not found
+        return 0; // Product not found
     }
 
     static class StockInfo {
@@ -124,14 +126,21 @@ public class Stock extends UnicastRemoteObject implements StockInterface, Serial
         }
 
 
-        public void updateQty(int quantity) {
+        public int updateQty(int quantity) {
             // Atualize a quantidade
             this.quantity += quantity;
 
             // Verificar se a quantidade não fica negativa
             if (this.quantity < 0) {
-                this.quantity = 0;
+                this.quantity -= quantity;
+
+                return 0;
+            } else if (this.quantity > 250) {
+                this.quantity -= quantity;
+
+                return -1;
             }
+            return 1;
         }
 
     }

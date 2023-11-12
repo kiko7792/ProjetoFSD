@@ -47,9 +47,9 @@ public class UpdateStockHandler extends Thread implements Serializable{
                     int quantityChange = Integer.parseInt(tokens.nextToken());
 
                     // Add or remove stock from the inventory
-                    boolean success = stock.updateStock(productIdentifier, quantityChange);
+                    int success = stock.updateStock(productIdentifier, quantityChange);
 
-                    if (success) {
+                    if (success == 1) {
                         stock.saveStockCSV("Stock.csv");
                         out.println("STOCK_UPDATED");
                         out.flush();
@@ -62,8 +62,10 @@ public class UpdateStockHandler extends Thread implements Serializable{
                                     "\nQuantidade em stock: " + stockInfo.getQuantity() + "\n---------------------------";
                         }
                         System.out.println(stock_response);
-                    } else {
-                        out.println("STOCK_ERROR: Product not found.");
+                    } else if(success == -1) {
+                        out.println("STOCK_ERROR: Excedente de quantidade.");
+                    } else if (success == 0) {
+                        out.println("STOCK ERROR: Produto não encontrado");
                     }
 
 

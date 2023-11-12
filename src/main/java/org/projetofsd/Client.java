@@ -17,8 +17,9 @@ public class Client {
         System.out.println("\n************************************************************");
         System.out.println("*	           Menu Cliente                            *");
         System.out.println("************************************************************   ");
-        System.out.println("*	1 - Adicionar/Remover Stock ");
-        System.out.println("*	2 - Sair      ");
+        System.out.println("*	1 - Listar Stock ");
+        System.out.println("*	2 - Adicionar/Remover Stock ");
+        System.out.println("*	3 - Sair      ");
         System.out.print("Selecione uma opção(1-2): ");
         selection = input.nextInt();
         return selection;
@@ -91,6 +92,38 @@ public class Client {
 
             switch (selection) {
                 case 1:
+                    try {
+                        InetAddress serverAddress = InetAddress.getByName(server);
+                        Socket socket = null;
+                        socket = new Socket(serverAddress, port);
+
+
+
+                        // Create a java.io.BufferedReader for the Socket; Use java.io.Socket.getInputStream() to obtain the Socket input stream
+                        BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+
+                        // Create a java.io.PrintWriter for the Socket; Use java.io.Socket.etOutputStream() to obtain the Socket output stream
+                        PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+
+                        String request = "STOCK_REQUEST";
+
+                        // write the request into the Socket
+                        out.println(request);
+
+                        // Read the server response - read the data until null
+                        String msg;
+                        while ((msg = in.readLine()) != null) {
+                            System.out.println(msg);
+                        }
+                        // Para encerrar a thread
+                        socket.close();
+
+                    } catch (IOException e) {
+                        System.out.println("Erro ao comunicar com o servidor: " + e);
+                        System.exit(1);
+                    }
+                    break;
+                case 2:
                     // Código para a opção "2" (adicionar/remover stock)
                     System.out.print("Introduza o identificador do produto: ");
                     String productIdentifier = input.next();
@@ -124,7 +157,7 @@ public class Client {
                         System.exit(1);
                     }
                     break;
-                case 2:
+                case 3:
                     System.out.println("A sair do programa.");
                     break;
 
@@ -132,7 +165,7 @@ public class Client {
                     System.out.println("Opção inválida. Tente novamente.");
             }
 
-        } while (selection != 2);
+        } while (selection != 3);
         timer.cancel();
     }
 }
