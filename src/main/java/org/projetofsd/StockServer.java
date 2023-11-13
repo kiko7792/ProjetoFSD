@@ -9,19 +9,13 @@ import java.rmi.registry.Registry;
 import java.util.StringTokenizer;
 import java.lang.SecurityManager;
 
-public class StockServer implements Serializable {
+public class StockServer implements Remote {
     static int DEFAULT_PORTSocket = 2000;
     static int DEFAULT_PORTRMI = 1099;
     int portRMI;
     int portSocket;
 
     private void bindRMI() throws RemoteException {
-
-        //  System.getProperties().put("java.security.policy", "./server.policy");
-
-     /*   if (System.getSecurityManager() == null) {
-            System.setSecurityManager(new SecurityManager());
-        }*/
 
         try {
             StockServerInterface stockServer = new StockServerImpl();
@@ -31,7 +25,7 @@ public class StockServer implements Serializable {
 
             System.out.println("Registry created");
         } catch (RemoteException e) {
-            System.out.println("Registry not found");
+            System.out.println(e + "Registry not found");
         }
     }
 
@@ -95,18 +89,4 @@ public class StockServer implements Serializable {
     }
     String SERVICE_NAME="/StockServer";
 
-
-    public void createStock() throws RemoteException {
-
-        Stock stock = null;
-        stock = new Stock();
-
-        try {
-            bindRMI();
-        } catch (RemoteException e1) {
-            System.err.println("erro ao registar o stub...");
-            e1.printStackTrace();
-        }
-
-    }
 }

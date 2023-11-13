@@ -5,7 +5,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.*;
 import java.rmi.RemoteException;
 
-public class Stock extends UnicastRemoteObject implements StockInterface, Serializable{
+public class Stock extends UnicastRemoteObject{
 
     public static Hashtable<String, StockInfo> presentStock = new Hashtable<>();
 
@@ -13,11 +13,6 @@ public class Stock extends UnicastRemoteObject implements StockInterface, Serial
 
         return presentStock;
 
-    }
-
-    @Override
-    public Hashtable<String, StockInfo> getStockRMI() throws RemoteException {
-        return presentStock;
     }
 
     public Stock() throws RemoteException{

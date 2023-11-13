@@ -28,7 +28,6 @@ public class ClientRMI {
             Registry registry = LocateRegistry.getRegistry(args[0], Integer.parseInt(args[1]));
 
             StockServerInterface stockServer = (StockServerInterface) registry.lookup(SERVICE_NAME);
-            //UnicastRemoteObject.exportObject(directNotifications,0);
 
             stockServer.subscribe(directNotifications);
 
@@ -80,12 +79,5 @@ public class ClientRMI {
             e.printStackTrace();
         }
 
-
-        /*try {
-            StockInterface getStockRMI = (StockInterface) LocateRegistry.getRegistry(args[1]).lookup(SERVICE_NAME);
-        } catch (Exception e) {
-            System.err.println("Error: " + e.getMessage());
-            e.printStackTrace();
-        }*/
     }
 }
