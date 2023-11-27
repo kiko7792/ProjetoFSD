@@ -2,6 +2,7 @@ package org.projetofsd;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.security.PrivateKey;
 import java.security.PublicKey;
 
 public interface StockServerInterface extends Remote {
@@ -12,5 +13,10 @@ public interface StockServerInterface extends Remote {
     String stock_request() throws RemoteException;
     String stock_update(String id, int qtd) throws RemoteException;
     PublicKey getPubKey() throws RemoteException;
+
+    PrivateKey getPrivKey() throws RemoteException;
+
     String getPublicKey() throws RemoteException;
+
+    String getPrivateKey() throws RemoteException;
 }

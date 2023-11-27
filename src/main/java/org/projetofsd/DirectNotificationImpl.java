@@ -12,4 +12,9 @@ public class DirectNotificationImpl extends UnicastRemoteObject implements Direc
     public void notifyStockUpdate(String message) throws RemoteException {
         System.out.println(message);
     }
+
+    @Override
+    public void stockUpdatedSigned(String message, String signature) throws RemoteException{
+        System.out.println(message + signature);
+    }
 }

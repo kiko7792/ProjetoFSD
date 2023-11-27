@@ -14,6 +14,7 @@ public class StockServerImpl extends UnicastRemoteObject implements StockServerI
     private final List<DirectNotificationInterface> subscribers;
     private KeyPair keyPair;
     private PublicKey clientPublicKey;
+    private PrivateKey privateKey;
     public PublicKey getClientPublicKey(){
         return clientPublicKey;
     }
@@ -27,6 +28,7 @@ public class StockServerImpl extends UnicastRemoteObject implements StockServerI
         keyGenerator.initialize(2048);
         keyPair = keyGenerator.generateKeyPair();
 
+        privateKey = keyPair.getPrivate();
         PublicKey serverPublicKey = keyPair.getPublic();
 
         clientPublicKey = serverPublicKey;
@@ -36,11 +38,18 @@ public class StockServerImpl extends UnicastRemoteObject implements StockServerI
     public PublicKey getPubKey() throws RemoteException {
         return keyPair.getPublic();
     }
+    @Override
+    public PrivateKey getPrivKey() throws RemoteException {
+        return keyPair.getPrivate();
+    }
 
     public String getPublicKey() {
         return Base64.getEncoder().encodeToString(keyPair.getPublic().getEncoded());
     }
 
+    public String getPrivateKey() {
+        return Base64.getEncoder().encodeToString(keyPair.getPrivate().getEncoded());
+    }
     @Override
     public void saveStockCSVRMI(String filename) throws RemoteException {
         synchronized (this) {
@@ -116,9 +125,10 @@ public class StockServerImpl extends UnicastRemoteObject implements StockServerI
     }
     @Override
     public String stock_request() throws RemoteException {
-
+        privateKey = privateKey;
         Stock stock = new Stock();
         stock.readStockCSV("Stock.csv");
+        String signedMessage = signMessage("STOCK_REQUEST"); // Sign the message
 
         StringBuilder stockDetails = new StringBuilder();
         stockDetails.append("Lista de Itens no Stock:\n");
@@ -127,7 +137,8 @@ public class StockServerImpl extends UnicastRemoteObject implements StockServerI
             stockDetails.append("Nome: ").append(stockInfo.getName()).append(", Identificador: ").append(stockInfo.getIdentifier()).append(", Quantidade: ").append(stockInfo.getQuantity()).append("\n");
         }
 
-        return stockDetails.toString();
+        return "SIGNED_MESSAGE:" + signedMessage + "\nPUBLIC_KEY:" + getPublicKey() + "\n" + stockDetails.toString() + "Private key" + getPrivateKey();
+
     }
 
     @Override
@@ -147,9 +158,28 @@ public class StockServerImpl extends UnicastRemoteObject implements StockServerI
         }
     }
 
+    @Override
+    public String stock_update_signed(String message, String signature) throws RemoteException {
+        DirectNotificationInterface directNotificationInterface = new DirectNotificationImpl();
+        return directNotificationInterface.stockUpdatedSigned(message + signature);
+    }
+
     private void notifySubscribers(String message) throws RemoteException {
         for (DirectNotificationInterface directNotification : subscribers) {
             directNotification.notifyStockUpdate(message);
+        }
+    }
+
+    private String signMessage(String message) {
+        try {
+            Signature signature = Signature.getInstance("SHA256withRSA");
+            signature.initSign(privateKey);
+            signature.update(message.getBytes());
+            byte[] signatureBytes = signature.sign();
+            return Base64.getEncoder().encodeToString(signatureBytes);
+        } catch (NoSuchAlgorithmException | InvalidKeyException | SignatureException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 
