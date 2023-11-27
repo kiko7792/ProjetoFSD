@@ -4,15 +4,42 @@ import java.io.*;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
+import java.security.*;
+
 
 
 public class StockServerImpl extends UnicastRemoteObject implements StockServerInterface{
     private final List<DirectNotificationInterface> subscribers;
-    public StockServerImpl() throws RemoteException {
+    private KeyPair keyPair;
+    private PublicKey clientPublicKey;
+    public PublicKey getClientPublicKey(){
+        return clientPublicKey;
+    }
+    public StockServerImpl() throws RemoteException, NoSuchAlgorithmException {
         subscribers = new ArrayList<>();
+        keyPairGenerator();
     }
 
+    public void keyPairGenerator() throws NoSuchAlgorithmException{
+        KeyPairGenerator keyGenerator = KeyPairGenerator.getInstance("RSA");
+        keyGenerator.initialize(2048);
+        keyPair = keyGenerator.generateKeyPair();
+
+        PublicKey serverPublicKey = keyPair.getPublic();
+
+        clientPublicKey = serverPublicKey;
+    }
+
+    @Override
+    public PublicKey getPubKey() throws RemoteException {
+        return keyPair.getPublic();
+    }
+
+    public String getPublicKey() {
+        return Base64.getEncoder().encodeToString(keyPair.getPublic().getEncoded());
+    }
 
     @Override
     public void saveStockCSVRMI(String filename) throws RemoteException {

@@ -3,6 +3,7 @@ package org.projetofsd;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.security.PublicKey;
 import java.sql.SQLOutput;
 import java.util.Scanner;
 
@@ -28,9 +29,9 @@ public class ClientRMI {
             Registry registry = LocateRegistry.getRegistry(args[0], Integer.parseInt(args[1]));
 
             StockServerInterface stockServer = (StockServerInterface) registry.lookup(SERVICE_NAME);
-
+            PublicKey serverPublicKey = stockServer.getPubKey();
             stockServer.subscribe(directNotifications);
-
+            System.out.println("Client: "+ serverPublicKey);
             System.out.println("Aceitou ligacao de cliente no endereco " + args[0] + " na porta " + args[1]);
 
 

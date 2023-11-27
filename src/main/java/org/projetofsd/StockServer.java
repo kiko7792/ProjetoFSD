@@ -6,6 +6,8 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.security.*;
+import java.util.Base64;
 import java.util.StringTokenizer;
 import java.lang.SecurityManager;
 
@@ -15,10 +17,11 @@ public class StockServer implements Remote {
     int portRMI;
     int portSocket;
 
-    private void bindRMI() throws RemoteException {
+
+    private void bindRMI(StockServerInterface stockServer) throws RemoteException {
 
         try {
-            StockServerInterface stockServer = new StockServerImpl();
+            System.out.println("Server: "+stockServer.getPubKey());
             LocateRegistry.createRegistry(portRMI);
 
             LocateRegistry.getRegistry("127.0.0.1",portRMI).rebind(SERVICE_NAME, stockServer);
@@ -29,7 +32,9 @@ public class StockServer implements Remote {
         }
     }
 
-    public static void main(String[] args) throws IOException {
+
+
+    public static void main(String[] args) throws IOException, NoSuchAlgorithmException {
 
         if (args.length < 2) {
             System.out.println("Uso: java StockServer <Porta Socket> <Porta RMI>");
@@ -39,6 +44,7 @@ public class StockServer implements Remote {
         int portSocket = Integer.parseInt(args[0]);
         int portRMI = Integer.parseInt(args[1]);
 
+        StockServerInterface stockServer = new StockServerImpl();
         StockServer server = new StockServer();
         server.portSocket = portSocket;
         server.portRMI = portRMI;
@@ -52,7 +58,8 @@ public class StockServer implements Remote {
 
         System.out.println("Servidor à espera de ligações no porto " + portSocket+"(Sockets)"+ " & "+ portRMI + "(RMI)");
 
-        server.bindRMI();
+        server.bindRMI(stockServer);
+
 
         while (true) {
             try {
@@ -63,6 +70,7 @@ public class StockServer implements Remote {
 
 // Start a GetStockRequestRequestHandler and UpdateStockHandler thread
 
+                PrintWriter out = new PrintWriter(connection.getOutputStream());
                 BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 String request = in.readLine();
                 String msg = request;
@@ -76,6 +84,9 @@ public class StockServer implements Remote {
                     } else if (metodo.equals("STOCK_UPDATE")) {
                         UpdateStockHandler ush = new UpdateStockHandler(connection, stock, request);
                         ush.start();
+                    } else if (request.equals("GET_PUBKEY")){
+                        out.println(stockServer.getPublicKey());
+                        out.flush();
                     }
                 }
 
