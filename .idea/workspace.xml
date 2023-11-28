@@ -4,15 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb288e0b-ab37-4209-9529-2ffcf7d2e8cf" name="Changes" comment="Fase 2 - finalizada">
+    <list default="true" id="eb288e0b-ab37-4209-9529-2ffcf7d2e8cf" name="Changes" comment="Fase 3 - RMI feito">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Stock.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Stock.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/ClientRMI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/ClientRMI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/DirectNotificationImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/SecureDirectNotificationImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/DirectNotificationInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/SecureDirectNotificationInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/GetStockRequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/GetStockRequestHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/StockServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/StockServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/StockServerImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/StockServerImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/StockServerInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/StockServerInterface.java" afterDir="false" />
     </list>
     <list id="24557854-9598-4da7-ab5f-6926437e61d1" name="Changes by miguelmiranda" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -112,7 +107,7 @@
       <recent name="org.projetofsd" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ClientAppRMI">
+  <component name="RunManager" selected="Application.Client">
     <configuration name="Client" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.projetofsd.Client" />
       <module name="ProjetoFSD" />
@@ -250,7 +245,9 @@
       <workItem from="1700498346510" duration="1239000" />
       <workItem from="1701040625198" duration="6214000" />
       <workItem from="1701095561596" duration="3317000" />
-      <workItem from="1701174705838" duration="331000" />
+      <workItem from="1701174705838" duration="805000" />
+      <workItem from="1701182889182" duration="344000" />
+      <workItem from="1701184510932" duration="432000" />
     </task>
     <task id="LOCAL-00001" summary="Hello World">
       <option name="closed" value="true" />
@@ -458,7 +455,14 @@
       <option name="project" value="LOCAL" />
       <updated>1699839444348</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Fase 3 - RMI feito">
+      <created>1701175057780</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1701175057780</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -500,7 +504,8 @@
     <MESSAGE value="5th attempt" />
     <MESSAGE value="Fase 2 - finalizada" />
     <MESSAGE value="Fase 2 - finalizada ( código quase limpo)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fase 2 - finalizada ( código quase limpo)" />
+    <MESSAGE value="Fase 3 - RMI feito" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fase 3 - RMI feito" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -68,12 +68,6 @@ public class ClientRMI {
                     String receivedMessageHash = parts[2];
                     processStockWithSignature(stock,signature,receivedMessageHash);
 
-                    // Listar o stock
-                    /*
-                    String stock = stockServer.stock_request();
-                    System.out.println("Stock:");
-                    System.out.println(stock);
-                    */
                 } else if (escolha == 2) {
                     // Atualizar a quantidade de um item no stock
                     String stock = stockServer.stock_request();
@@ -89,10 +83,6 @@ public class ClientRMI {
                     String signature = parts[1];
                     String receivedMessageHash = parts[2];
                     processStockWithSignature(updatedStock,signature,receivedMessageHash);
-
-                    //String update = stockServer.stock_update(productIdentifier, quantityChange);
-                    //System.out.println(update);
-
 
                 } else if (escolha == 3) {
                     // Sair do loop e encerrar o cliente
