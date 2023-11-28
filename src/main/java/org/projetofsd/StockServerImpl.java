@@ -3,53 +3,36 @@ package org.projetofsd;
 import java.io.*;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.security.*;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
-import java.security.*;
-
 
 
 public class StockServerImpl extends UnicastRemoteObject implements StockServerInterface{
-    private final List<DirectNotificationInterface> subscribers;
-    private KeyPair keyPair;
-    private PublicKey clientPublicKey;
-    private PrivateKey privateKey;
-    public PublicKey getClientPublicKey(){
-        return clientPublicKey;
-    }
-    public StockServerImpl() throws RemoteException, NoSuchAlgorithmException {
+    private final List<SecureDirectNotificationInterface> subscribers;
+    static PrivateKey privKey;
+    static PublicKey publicKey;
+
+    public StockServerImpl() throws RemoteException {
         subscribers = new ArrayList<>();
-        keyPairGenerator();
     }
 
     public void keyPairGenerator() throws NoSuchAlgorithmException{
-        KeyPairGenerator keyGenerator = KeyPairGenerator.getInstance("RSA");
-        keyGenerator.initialize(2048);
-        keyPair = keyGenerator.generateKeyPair();
-
-        privateKey = keyPair.getPrivate();
-        PublicKey serverPublicKey = keyPair.getPublic();
-
-        clientPublicKey = serverPublicKey;
+        KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance("RSA");
+        keyPairGen.initialize(2048);
+        KeyPair pair = keyPairGen.generateKeyPair();
+        privKey = pair.getPrivate();
+        publicKey = pair.getPublic();
     }
 
-    @Override
-    public PublicKey getPubKey() throws RemoteException {
-        return keyPair.getPublic();
+    public PrivateKey getPrivKey(){
+        return privKey;
     }
-    @Override
-    public PrivateKey getPrivKey() throws RemoteException {
-        return keyPair.getPrivate();
+    public PublicKey getPubKey(){
+        return publicKey;
     }
 
-    public String getPublicKey() {
-        return Base64.getEncoder().encodeToString(keyPair.getPublic().getEncoded());
-    }
-
-    public String getPrivateKey() {
-        return Base64.getEncoder().encodeToString(keyPair.getPrivate().getEncoded());
-    }
     @Override
     public void saveStockCSVRMI(String filename) throws RemoteException {
         synchronized (this) {
@@ -94,7 +77,7 @@ public class StockServerImpl extends UnicastRemoteObject implements StockServerI
     }
 
     @Override
-    public void subscribe(DirectNotificationInterface directNotification) throws RemoteException {
+    public void subscribe(SecureDirectNotificationInterface directNotification) throws RemoteException {
         subscribers.add(directNotification);
     }
 
@@ -125,10 +108,9 @@ public class StockServerImpl extends UnicastRemoteObject implements StockServerI
     }
     @Override
     public String stock_request() throws RemoteException {
-        privateKey = privateKey;
+
         Stock stock = new Stock();
         stock.readStockCSV("Stock.csv");
-        String signedMessage = signMessage("STOCK_REQUEST"); // Sign the message
 
         StringBuilder stockDetails = new StringBuilder();
         stockDetails.append("Lista de Itens no Stock:\n");
@@ -137,8 +119,7 @@ public class StockServerImpl extends UnicastRemoteObject implements StockServerI
             stockDetails.append("Nome: ").append(stockInfo.getName()).append(", Identificador: ").append(stockInfo.getIdentifier()).append(", Quantidade: ").append(stockInfo.getQuantity()).append("\n");
         }
 
-        return "SIGNED_MESSAGE:" + signedMessage + "\nPUBLIC_KEY:" + getPublicKey() + "\n" + stockDetails.toString() + "Private key" + getPrivateKey();
-
+        return stockDetails.toString();
     }
 
     @Override
@@ -158,29 +139,86 @@ public class StockServerImpl extends UnicastRemoteObject implements StockServerI
         }
     }
 
-    @Override
-    public String stock_update_signed(String message, String signature) throws RemoteException {
-        DirectNotificationInterface directNotificationInterface = new DirectNotificationImpl();
-        return directNotificationInterface.stockUpdatedSigned(message + signature);
-    }
-
     private void notifySubscribers(String message) throws RemoteException {
-        for (DirectNotificationInterface directNotification : subscribers) {
+        for (SecureDirectNotificationInterface directNotification : subscribers) {
             directNotification.notifyStockUpdate(message);
         }
     }
-
-    private String signMessage(String message) {
-        try {
-            Signature signature = Signature.getInstance("SHA256withRSA");
-            signature.initSign(privateKey);
-            signature.update(message.getBytes());
-            byte[] signatureBytes = signature.sign();
-            return Base64.getEncoder().encodeToString(signatureBytes);
-        } catch (NoSuchAlgorithmException | InvalidKeyException | SignatureException e) {
-            e.printStackTrace();
-            return null;
+    private void notifySubscribersWithSignature(String message, String signature) throws RemoteException {
+        for (SecureDirectNotificationInterface directNotification : subscribers) {
+            directNotification.stockUpdatedSigned(message,signature);
         }
+    }
+
+    @Override
+    public String getStockWithSignature() throws RemoteException {
+        try {
+            // Lógica para obter o stock (substitua com sua lógica real)
+            Stock stock = new Stock();
+            stock.readStockCSV("Stock.csv");
+
+            StringBuilder stockDetails = new StringBuilder();
+            stockDetails.append("Lista de Itens no Stock:\n");
+
+            for (Stock.StockInfo stockInfo : Stock.presentStock.values()) {
+                stockDetails.append("Nome: ").append(stockInfo.getName()).append(", Identificador: ").append(stockInfo.getIdentifier()).append(", Quantidade: ").append(stockInfo.getQuantity()).append("\n");
+            }
+
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] messageHash = digest.digest(stockDetails.toString().getBytes());
+
+            Signature signature = Signature.getInstance("SHA256withRSA");
+            signature.initSign(privKey);
+            signature.update(messageHash);
+            byte[] digitalSignature = signature.sign();
+
+            String signatureString = Base64.getEncoder().encodeToString(digitalSignature);
+
+
+            // Devolve o stock e assinatura digital concatenados
+            return stockDetails.toString()+"."+signatureString+"."+bytesToHex(messageHash);
+        } catch (NoSuchAlgorithmException | InvalidKeyException | SignatureException e) {
+            throw new RemoteException("Erro ao processar a assinatura digital", e);
+        }
+    }
+
+    @Override
+    public String updateStockWithSignature(String id, int qty) throws RemoteException{
+        int success = updateStockRMI(id, qty);
+        if(success == 1){
+            String stock = stock_request();
+            try{
+
+                MessageDigest digest = MessageDigest.getInstance("SHA-256");
+                byte[] messageHash = digest.digest(stock.getBytes());
+
+                Signature signature = Signature.getInstance("SHA256withRSA");
+                signature.initSign(privKey);
+                signature.update(messageHash);
+                byte[] digitalSignature = signature.sign();
+
+                String signatureString = Base64.getEncoder().encodeToString(digitalSignature);
+
+                notifySubscribersWithSignature(stock, signatureString);
+                return stock+"."+signatureString+"."+bytesToHex(messageHash);
+            }catch (NoSuchAlgorithmException e) {
+                throw new RemoteException("Algoritmo de assinatura não suportado", e);
+            } catch (InvalidKeyException e) {
+                throw new RemoteException("Chave privada inválida para assinatura", e);
+            } catch (SignatureException e) {
+                throw new RemoteException("Erro ao assinar os dados", e);
+            }
+        }else{
+            throw new RemoteException("STOCK_ERROR");
+        }
+    }
+
+    private static String bytesToHex(byte[] bytes) {
+        StringBuilder result = new StringBuilder();
+        for (byte b : bytes) {
+            result.append(String.format("%02X", b));
+        }
+        return result.toString();
     }
 
 
