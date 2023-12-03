@@ -6,8 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="eb288e0b-ab37-4209-9529-2ffcf7d2e8cf" name="Changes" comment="Fase 3 - RMI feito">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stock.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Stock.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/ClientRMI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/ClientRMI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/GetStockRequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/GetStockRequestHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/StockServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/StockServer.java" afterDir="false" />
     </list>
     <list id="24557854-9598-4da7-ab5f-6926437e61d1" name="Changes by miguelmiranda" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -248,6 +249,7 @@
       <workItem from="1701174705838" duration="805000" />
       <workItem from="1701182889182" duration="344000" />
       <workItem from="1701184510932" duration="432000" />
+      <workItem from="1701598567465" duration="8409000" />
     </task>
     <task id="LOCAL-00001" summary="Hello World">
       <option name="closed" value="true" />
@@ -514,6 +516,96 @@
           <url>file://$PROJECT_DIR$/src/main/java/org/projetofsd/StockServerImpl.java</url>
           <line>50</line>
           <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/projetofsd/Client.java</url>
+          <line>86</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/projetofsd/Client.java</url>
+          <line>67</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/projetofsd/Client.java</url>
+          <line>267</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/projetofsd/Client.java</url>
+          <line>262</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/projetofsd/Client.java</url>
+          <line>263</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/projetofsd/Client.java</url>
+          <line>264</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/projetofsd/Client.java</url>
+          <line>269</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/projetofsd/Client.java</url>
+          <line>270</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/projetofsd/Client.java</url>
+          <line>274</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/projetofsd/Client.java</url>
+          <line>171</line>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/projetofsd/Client.java</url>
+          <line>172</line>
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/projetofsd/Client.java</url>
+          <line>173</line>
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/projetofsd/Client.java</url>
+          <line>175</line>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/projetofsd/Client.java</url>
+          <line>245</line>
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/projetofsd/Client.java</url>
+          <line>244</line>
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/projetofsd/Client.java</url>
+          <line>246</line>
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/projetofsd/Client.java</url>
+          <line>247</line>
+          <option name="timeStamp" value="27" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/projetofsd/Client.java</url>
+          <line>248</line>
+          <option name="timeStamp" value="28" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -10,6 +10,7 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
+import java.util.Base64;
 import java.util.StringTokenizer;
 import java.lang.SecurityManager;
 
@@ -74,10 +75,12 @@ public class StockServer implements Remote {
 // Start a GetStockRequestRequestHandler and UpdateStockHandler thread
 
                 BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                PrintWriter out = new PrintWriter(connection.getOutputStream(), true);
                 String request = in.readLine();
                 PrivateKey privateKey = stockServer.getPrivKey();
                 System.out.println("Privatekey no servidor: \n"+privateKey);
                 String msg = request;
+                String PUBKEY = "";
 
                 StringTokenizer tokens = new StringTokenizer(msg);
                 String metodo = tokens.nextToken();
@@ -90,10 +93,9 @@ public class StockServer implements Remote {
                         ush.start();
                     } else if (request.equals("GET_PUBKEY")) {
                         try {
-                            ObjectOutputStream objectOutputStream = new ObjectOutputStream(connection.getOutputStream());
-                            objectOutputStream.writeObject(stockServer.getPubKey());
-                            objectOutputStream.flush();
-
+                            String publicKeyString = Base64.getEncoder().encodeToString(stockServer.getPubKey().getEncoded());
+                            out.println("PUB_KEY: " + publicKeyString);
+                            out.flush();
                         } catch (IOException e) {
                             System.out.println("Erro ao enviar chave pública: " + e.getMessage());
                         }

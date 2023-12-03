@@ -68,10 +68,8 @@ public class GetStockRequestHandler extends Thread implements Serializable {
 
                 String digitalSignaturString = Base64.getEncoder().encodeToString(digitalSignature);
 
-                String stockWithSignature = stock_response+"\nSIGNATURE: "+digitalSignaturString;
+                String stockWithSignature = stock_response + "SIGNATURE:" + digitalSignaturString;
 
-                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-                writer.write(stockWithSignature);
                 out.println(stockWithSignature);
 
 
