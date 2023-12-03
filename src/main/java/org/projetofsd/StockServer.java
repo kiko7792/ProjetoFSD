@@ -6,10 +6,8 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.security.PrivateKey;
-import java.security.PublicKey;
+import java.security.*;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.StringTokenizer;
 import java.lang.SecurityManager;
@@ -19,6 +17,24 @@ public class StockServer implements Remote {
     static int DEFAULT_PORTRMI = 1099;
     int portRMI;
     int portSocket;
+    private PrivateKey privKey;
+    private PublicKey publicKey;
+
+
+    private void keyPairGenerator() throws NoSuchAlgorithmException{
+        KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance("RSA");
+        keyPairGen.initialize(2048);
+        KeyPair pair = keyPairGen.generateKeyPair();
+        privKey = pair.getPrivate();
+        publicKey = pair.getPublic();
+    }
+
+    public PrivateKey getPrivKey(){
+        return privKey;
+    }
+    public PublicKey getPubKey(){
+        return publicKey;
+    }
 
 
     private void bindRMI(StockServerInterface stockServer) throws RemoteException {
@@ -45,7 +61,6 @@ public class StockServer implements Remote {
         int portRMI = Integer.parseInt(args[1]);
 
         StockServerInterface stockServer = new StockServerImpl();
-        stockServer.keyPairGenerator();
         System.out.println("1");
         System.out.println("PublicKey server: " + stockServer.getPubKey());
         StockServer server = new StockServer();
@@ -53,6 +68,8 @@ public class StockServer implements Remote {
         server.portRMI = portRMI;
 
         Stock stock = new Stock();
+
+        server.keyPairGenerator();
 
         ServerSocket serverSocket = null;
 
@@ -69,18 +86,28 @@ public class StockServer implements Remote {
 // Listen for a connection to be made to the socket and accepts it: API java.net.ServerSocket
                 Socket connection = serverSocket.accept();
 
-                System.out.println(stockServer.getPrivKey());
-
 
 // Start a GetStockRequestRequestHandler and UpdateStockHandler thread
 
                 BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 PrintWriter out = new PrintWriter(connection.getOutputStream(), true);
                 String request = in.readLine();
-                PrivateKey privateKey = stockServer.getPrivKey();
+                PrivateKey privateKey = server.getPrivKey();
                 System.out.println("Privatekey no servidor: \n"+privateKey);
                 String msg = request;
                 String PUBKEY = "";
+
+                String dados = "ABCDEFGHIJKLMNOPQRSTPUXZY";
+                Signature signature = Signature.getInstance("SHA256withRSA");
+                signature.initSign(privateKey);
+                System.out.println("pivKey server:\n"+ privateKey);
+                byte[] dadosBytes = dados.getBytes();
+                signature.update(dadosBytes);
+                byte[] digitalSignature = signature.sign();
+                String digitalSignaturString = Base64.getEncoder().encodeToString(digitalSignature);
+
+                System.out.println("Assinatura no Server:\n" + digitalSignaturString);
+
 
                 StringTokenizer tokens = new StringTokenizer(msg);
                 String metodo = tokens.nextToken();
@@ -92,19 +119,17 @@ public class StockServer implements Remote {
                         UpdateStockHandler ush = new UpdateStockHandler(connection, stock, request);
                         ush.start();
                     } else if (request.equals("GET_PUBKEY")) {
-                        try {
-                            String publicKeyString = Base64.getEncoder().encodeToString(stockServer.getPubKey().getEncoded());
-                            out.println("PUB_KEY: " + publicKeyString);
-                            out.flush();
-                        } catch (IOException e) {
-                            System.out.println("Erro ao enviar chave pública: " + e.getMessage());
-                        }
+                        String publicKeyString = Base64.getEncoder().encodeToString(server.getPubKey().getEncoded());
+                        out.println("PUB_KEY: " + publicKeyString);
+                        out.flush();
                     }
                 }
 
             } catch (IOException e) {
                 System.out.println("STOCK_ERROR: " + e);
                 System.exit(1);
+            } catch (SignatureException e) {
+                throw new RuntimeException(e);
             }
         }
 

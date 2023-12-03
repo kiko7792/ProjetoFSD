@@ -33,7 +33,6 @@ public class ClientRMI {
             StockServerInterface stockServer = (StockServerInterface) registry.lookup(SERVICE_NAME);
             serverPubKey = stockServer.getPubKey();
             String pubKey = Base64.getEncoder().encodeToString(serverPubKey.getEncoded());
-            byte[] publiKey = Base64.getDecoder().decode(pubKey);
 
             System.out.println("PublicKey client: "+pubKey);
 

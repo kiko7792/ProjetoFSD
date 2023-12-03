@@ -12,9 +12,9 @@ public interface StockServerInterface extends Remote {
     int updateStockRMI(String productIdentifier, int quantityChange) throws RemoteException;
     String stock_request() throws RemoteException;
     String stock_update(String id, int qtd) throws RemoteException;
-    void keyPairGenerator() throws NoSuchAlgorithmException, RemoteException;
+   // void keyPairGenerator() throws NoSuchAlgorithmException, RemoteException;
     PublicKey getPubKey() throws NoSuchAlgorithmException,InvalidKeyException, RemoteException;
-    PrivateKey getPrivKey() throws NoSuchAlgorithmException,InvalidKeyException,RemoteException;
+    //PrivateKey getPrivKey() throws NoSuchAlgorithmException,InvalidKeyException,RemoteException;
     String getStockWithSignature() throws RemoteException;
     String updateStockWithSignature(String id, int qty) throws RemoteException;
 }

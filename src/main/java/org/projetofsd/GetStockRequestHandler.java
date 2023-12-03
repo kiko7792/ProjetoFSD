@@ -14,7 +14,7 @@ public class GetStockRequestHandler extends Thread implements Serializable {
     BufferedReader in;
     PrintWriter out;
     String request;
-    private PrivateKey privateKey;
+    private final PrivateKey privateKey;
 
 
     public GetStockRequestHandler(Socket socket, Stock stock, String request, PrivateKey privateKey) {
@@ -37,38 +37,39 @@ public class GetStockRequestHandler extends Thread implements Serializable {
                 System.out.println("Aceitou ligacao de cliente no endereco " + socket.getInetAddress() + " na porta " + socket.getPort());
 
                 stock.readStockCSV("Stock.csv");
-                String stock_response = "";
+                String stockResponse = null;
                 String msg = request;
-
 
 
                 StringTokenizer tokens = new StringTokenizer(msg);
                 String metodo = tokens.nextToken();
                 Hashtable<String, Stock.StockInfo> stockList = stock.getStock();
                 if (metodo.equals("STOCK_REQUEST")) {
-                    StringBuilder stock_responseBuilder = new StringBuilder();
+                    StringBuilder stockResponseBuilder = new StringBuilder();
                     for (Enumeration<String> keys = stockList.keys(); keys.hasMoreElements(); ) {
                         String key = keys.nextElement();
                         Stock.StockInfo stockInfo = stockList.get(key);
 
-                        stock_responseBuilder.append("\nNome do Produto: ").append(stockInfo.getName())
-                                .append("\nIdentificador: ").append(stockInfo.getIdentifier())
-                                .append("\nQuantidade em stock: ").append(stockInfo.getQuantity())
-                                .append("\n---------------------------");
+                       stockResponseBuilder.append("Nome: ").append(stockInfo.getName()).append(", Identificador: ").append(stockInfo.getIdentifier()).append(", Quantidade: ").append(stockInfo.getQuantity()).append("\n");
+
                     }
-                    stock_response = stock_responseBuilder.toString();
+                    stockResponse = stockResponseBuilder.toString();
                 }
+
+                String dados = "ABCDEFGHIJKLMNOPQRSTPUXZY";
+
+                System.out.println("privKey Handler:\n" + privateKey);
+
                 Signature signature = Signature.getInstance("SHA256withRSA");
                 signature.initSign(privateKey);
-                byte[] stock = stock_response.getBytes();
+                byte[] stock = stockResponse.getBytes();
                 signature.update(stock);
                 byte[] digitalSignature = signature.sign();
 
-                System.out.println("PrivateKey no handler:" + privateKey);
 
                 String digitalSignaturString = Base64.getEncoder().encodeToString(digitalSignature);
 
-                String stockWithSignature = stock_response + "SIGNATURE:" + digitalSignaturString;
+                String stockWithSignature = stockResponse +"SIGNATURE:"+ digitalSignaturString;
 
                 out.println(stockWithSignature);
 
@@ -81,11 +82,7 @@ public class GetStockRequestHandler extends Thread implements Serializable {
             } catch (IOException e) {
                 System.out.println("STOCK_ERROR: " + e);
                 System.exit(1);
-            } catch (NoSuchAlgorithmException e) {
-                throw new RuntimeException(e);
-            } catch (SignatureException e) {
-                throw new RuntimeException(e);
-            } catch (InvalidKeyException e) {
+            } catch (NoSuchAlgorithmException | SignatureException | InvalidKeyException e) {
                 throw new RuntimeException(e);
             }
 

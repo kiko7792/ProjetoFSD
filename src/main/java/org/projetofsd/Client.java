@@ -122,6 +122,7 @@ public class Client {
                 }
             }
         };
+        Client client = new Client();
         // Cria um temporizador que executa a tarefa a cada 5 segundos
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(task, 0, 10000);
@@ -153,27 +154,30 @@ public class Client {
                         out.println(request);
 
                         // Read the server response - read the data until null
-// Receber a resposta do servidor
+                        // Receber a resposta do servidor
                         StringBuilder responseBuilder = new StringBuilder();
                         String line;
 
-// Ler enquanto houver dados disponíveis
+                        // Ler enquanto houver dados disponíveis
                         while ((line = in.readLine()) != null) {
                             responseBuilder.append(line).append("\n");
                         }
 
                         String response = responseBuilder.toString().trim();
 
-// Verificar se a resposta não é nula e contém dados
+                        // Verificar se a resposta não é nula e contém dados
                         if (!response.isEmpty()) {
                             // Verificar a assinatura com a chave pública do servidor
                             if (response.contains("SIGNATURE:")) {
                                 // Separar os dados e a assinatura
                                 String[] parts = response.split("SIGNATURE:");
-                                String stockData = parts[0].trim();
-                                String signature = parts[1].trim();
+                                String stockData = parts[0];
+                                String signature = parts[1];
 
-                                if (verifySignature(stockData, signature, serverPublicKey)) {
+                                System.out.println("stock:\n"+stockData);
+
+
+                                if (client.verifySignature(stockData, signature, serverPublicKey)) {
                                     System.out.println("Assinatura verificada com sucesso.");
                                     System.out.println("Dados do Stock:\n" + stockData);
                                 } else {
@@ -240,13 +244,19 @@ public class Client {
 
     }
 
-    public static boolean verifySignature(String data, String signature, PublicKey publicKey) {
+    private boolean verifySignature(String data, String signature, PublicKey publicKey) {
         try {
+            byte[] signatureBytes = Base64.getDecoder().decode(signature);
+            System.out.println("publickey:" + publicKey);
+            System.out.println("assinatura:" + signature);
             Signature verifier = Signature.getInstance("SHA256withRSA");
             verifier.initVerify(publicKey);
-            verifier.update(data.getBytes());
-            byte[] signatureBytes = Base64.getDecoder().decode(signature);
-            return verifier.verify(signatureBytes);
+            byte[] stock = data.getBytes();
+            verifier.update(stock);
+            boolean verified = verifier.verify(signatureBytes);
+
+            return verified;
+
         } catch (NoSuchAlgorithmException | InvalidKeyException | SignatureException e) {
             e.printStackTrace();
             return false;
