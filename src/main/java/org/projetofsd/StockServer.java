@@ -17,17 +17,9 @@ public class StockServer implements Remote {
     static int DEFAULT_PORTRMI = 1099;
     int portRMI;
     int portSocket;
-    private PrivateKey privKey;
-    private PublicKey publicKey;
+    protected PrivateKey privKey;
+    protected PublicKey publicKey;
 
-
-    private void keyPairGenerator() throws NoSuchAlgorithmException{
-        KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance("RSA");
-        keyPairGen.initialize(2048);
-        KeyPair pair = keyPairGen.generateKeyPair();
-        privKey = pair.getPrivate();
-        publicKey = pair.getPublic();
-    }
 
     public PrivateKey getPrivKey(){
         return privKey;
@@ -35,6 +27,7 @@ public class StockServer implements Remote {
     public PublicKey getPubKey(){
         return publicKey;
     }
+
 
 
     private void bindRMI(StockServerInterface stockServer) throws RemoteException {
@@ -60,16 +53,21 @@ public class StockServer implements Remote {
         int portSocket = Integer.parseInt(args[0]);
         int portRMI = Integer.parseInt(args[1]);
 
-        StockServerInterface stockServer = new StockServerImpl();
-        System.out.println("1");
-        System.out.println("PublicKey server: " + stockServer.getPubKey());
+
         StockServer server = new StockServer();
         server.portSocket = portSocket;
         server.portRMI = portRMI;
 
         Stock stock = new Stock();
 
-        server.keyPairGenerator();
+
+        KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance("RSA");
+        keyPairGen.initialize(2048);
+        KeyPair pair = keyPairGen.generateKeyPair();
+        server.privKey = pair.getPrivate();
+        server.publicKey = pair.getPublic();
+
+        StockServerInterface stockServer = new StockServerImpl(pair);
 
         ServerSocket serverSocket = null;
 
@@ -97,17 +95,6 @@ public class StockServer implements Remote {
                 String msg = request;
                 String PUBKEY = "";
 
-                String dados = "ABCDEFGHIJKLMNOPQRSTPUXZY";
-                Signature signature = Signature.getInstance("SHA256withRSA");
-                signature.initSign(privateKey);
-                System.out.println("pivKey server:\n"+ privateKey);
-                byte[] dadosBytes = dados.getBytes();
-                signature.update(dadosBytes);
-                byte[] digitalSignature = signature.sign();
-                String digitalSignaturString = Base64.getEncoder().encodeToString(digitalSignature);
-
-                System.out.println("Assinatura no Server:\n" + digitalSignaturString);
-
 
                 StringTokenizer tokens = new StringTokenizer(msg);
                 String metodo = tokens.nextToken();
@@ -128,8 +115,6 @@ public class StockServer implements Remote {
             } catch (IOException e) {
                 System.out.println("STOCK_ERROR: " + e);
                 System.exit(1);
-            } catch (SignatureException e) {
-                throw new RuntimeException(e);
             }
         }
 

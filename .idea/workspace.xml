@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb288e0b-ab37-4209-9529-2ffcf7d2e8cf" name="Changes" comment="Fase 3 - RMI feito">
+    <list default="true" id="eb288e0b-ab37-4209-9529-2ffcf7d2e8cf" name="Changes" comment="Idk">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/GetStockRequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/GetStockRequestHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/ClientRMI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/ClientRMI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/StockServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/StockServer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/StockServerImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/StockServerImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/StockServerInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/StockServerInterface.java" afterDir="false" />
@@ -110,7 +109,7 @@
       <recent name="org.projetofsd" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ClientAppRMI">
+  <component name="RunManager" selected="Application.Client">
     <configuration name="Client" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.projetofsd.Client" />
       <module name="ProjetoFSD" />
@@ -264,7 +263,7 @@
       <workItem from="1701184510932" duration="432000" />
       <workItem from="1701598567465" duration="8409000" />
       <workItem from="1701613203361" duration="4582000" />
-      <workItem from="1701642696640" duration="442000" />
+      <workItem from="1701642696640" duration="2964000" />
     </task>
     <task id="LOCAL-00001" summary="Hello World">
       <option name="closed" value="true" />
@@ -479,7 +478,14 @@
       <option name="project" value="LOCAL" />
       <updated>1701175057780</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="Idk">
+      <created>1701643361805</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1701643361805</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -497,7 +503,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Hello World" />
     <MESSAGE value="Classes criadas" />
     <MESSAGE value="Criar Classes" />
     <MESSAGE value="Criar conexão" />
@@ -522,7 +527,8 @@
     <MESSAGE value="Fase 2 - finalizada" />
     <MESSAGE value="Fase 2 - finalizada ( código quase limpo)" />
     <MESSAGE value="Fase 3 - RMI feito" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fase 3 - RMI feito" />
+    <MESSAGE value="Idk" />
+    <option name="LAST_COMMIT_MESSAGE" value="Idk" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -586,6 +592,11 @@
           <url>file://$PROJECT_DIR$/src/main/java/org/projetofsd/Client.java</url>
           <line>254</line>
           <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/projetofsd/StockServerImpl.java</url>
+          <line>182</line>
+          <option name="timeStamp" value="28" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

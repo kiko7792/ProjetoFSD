@@ -32,9 +32,10 @@ public class ClientRMI {
 
             StockServerInterface stockServer = (StockServerInterface) registry.lookup(SERVICE_NAME);
             serverPubKey = stockServer.getPubKey();
-            String pubKey = Base64.getEncoder().encodeToString(serverPubKey.getEncoded());
-
-            System.out.println("PublicKey client: "+pubKey);
+            String pubKey = null;
+            if (serverPubKey != null) {
+                pubKey = Base64.getEncoder().encodeToString(serverPubKey.getEncoded());
+            }
 
             stockServer.subscribe(directNotifications);
 

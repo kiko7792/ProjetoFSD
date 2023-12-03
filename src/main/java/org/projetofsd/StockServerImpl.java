@@ -11,13 +11,19 @@ import java.util.List;
 
 public class StockServerImpl extends UnicastRemoteObject implements StockServerInterface{
     private final List<SecureDirectNotificationInterface> subscribers;
-    //static PrivateKey privKey;
-    //static PublicKey publicKey;
+    final PrivateKey privKey;
+    final PublicKey publicKey;
 
-    public StockServerImpl() throws RemoteException {
+    public StockServerImpl(KeyPair keyPair) throws RemoteException {
         subscribers = new ArrayList<>();
+        this.privKey = keyPair.getPrivate();
+        this.publicKey = keyPair.getPublic();
+
     }
-    StockServer stockServer = new StockServer();
+
+    public PublicKey getPubKey() {
+        return publicKey;
+    }
 
     /*
     public void keyPairGenerator() throws NoSuchAlgorithmException{
@@ -36,12 +42,8 @@ public class StockServerImpl extends UnicastRemoteObject implements StockServerI
     }
     */
 
-    PublicKey publicKey = stockServer.getPubKey();
-    PrivateKey privKey = stockServer.getPrivKey();
 
-    public PublicKey getPubKey(){
-        return publicKey;
-    }
+
 
     @Override
     public void saveStockCSVRMI(String filename) throws RemoteException {
