@@ -85,7 +85,7 @@ public class Client {
         }
 
         System.out.println("server PubKey: " + serverPublicKey);
-
+        Client client = new Client();
 
         //Lista o stock ao iniciar o servidor
         TimerTask task = new TimerTask() {
@@ -108,10 +108,39 @@ public class Client {
                     // write the request into the Socket
                     out.println(request);
 
-                    // Read the server response - read the data until null
-                    String msg;
-                    while ((msg = in.readLine()) != null) {
-                        System.out.println(msg);
+                    StringBuilder responseBuilder = new StringBuilder();
+                    String line;
+
+                    // Ler enquanto houver dados disponíveis
+                    while ((line = in.readLine()) != null) {
+                        responseBuilder.append(line).append("\n");
+                    }
+
+                    String response = responseBuilder.toString().trim();
+
+                    // Verificar se a resposta não é nula e contém dados
+                    if (!response.isEmpty()) {
+                        // Verificar a assinatura com a chave pública do servidor
+                        if (response.contains("SIGNATURE:")) {
+                            // Separar os dados e a assinatura
+                            String[] parts = response.split("SIGNATURE:");
+                            String stockData = parts[0];
+                            String signature = parts[1];
+
+                            System.out.println("stock:\n"+stockData);
+
+
+                            if (client.verifySignature(stockData, signature, serverPublicKey)) {
+                                System.out.println("Assinatura verificada com sucesso.");
+                                System.out.println("Dados do Stock:\n" + stockData);
+                            } else {
+                                System.out.println("Assinatura inválida. Os dados podem ter sido modificados.");
+                            }
+                        } else {
+                            System.out.println("Resposta do servidor não contém assinatura.");
+                        }
+                    } else {
+                        System.out.println("Resposta do servidor vazia ou nula.");
                     }
                     // Para encerrar a thread
                     socket.close();
@@ -122,7 +151,7 @@ public class Client {
                 }
             }
         };
-        Client client = new Client();
+
         // Cria um temporizador que executa a tarefa a cada 5 segundos
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(task, 0, 10000);
@@ -221,8 +250,40 @@ public class Client {
                         out.println(request);
 
                         // Read the server response
-                        String response = in.readLine();
-                        System.out.println(response);
+                        StringBuilder responseBuilder = new StringBuilder();
+                        String line;
+
+                        // Ler enquanto houver dados disponíveis
+                        while ((line = in.readLine()) != null) {
+                            responseBuilder.append(line).append("\n");
+                        }
+
+                        String response = responseBuilder.toString().trim();
+
+                        // Verificar se a resposta não é nula e contém dados
+                        if (!response.isEmpty()) {
+                            // Verificar a assinatura com a chave pública do servidor
+                            if (response.contains("SIGNATURE:")) {
+                                // Separar os dados e a assinatura
+                                String[] parts = response.split("SIGNATURE:");
+                                String stockData = parts[0];
+                                String signature = parts[1];
+
+                                System.out.println("stock:\n"+stockData);
+
+
+                                if (client.verifySignature(stockData, signature, serverPublicKey)) {
+                                    System.out.println("Assinatura verificada com sucesso.");
+                                    System.out.println("Dados do Stock:\n" + stockData);
+                                } else {
+                                    System.out.println("Assinatura inválida. Os dados podem ter sido modificados.");
+                                }
+                            } else {
+                                System.out.println("Resposta do servidor não contém assinatura.");
+                            }
+                        } else {
+                            System.out.println("Resposta do servidor vazia ou nula.");
+                        }
 
                         // Close the socket
                         socket.close();

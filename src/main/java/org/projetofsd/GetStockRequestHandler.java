@@ -56,8 +56,6 @@ public class GetStockRequestHandler extends Thread implements Serializable {
                     stockResponse = stockResponseBuilder.toString();
                 }
 
-                String dados = "ABCDEFGHIJKLMNOPQRSTPUXZY";
-
                 System.out.println("privKey Handler:\n" + privateKey);
 
                 Signature signature = Signature.getInstance("SHA256withRSA");

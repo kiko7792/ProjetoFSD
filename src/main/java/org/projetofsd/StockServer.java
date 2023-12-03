@@ -103,7 +103,7 @@ public class StockServer implements Remote {
                         GetStockRequestHandler gsrh = new GetStockRequestHandler(connection, stock, request, privateKey);
                         gsrh.start();
                     } else if (metodo.equals("STOCK_UPDATE")) {
-                        UpdateStockHandler ush = new UpdateStockHandler(connection, stock, request);
+                        UpdateStockHandler ush = new UpdateStockHandler(connection, stock, request, privateKey);
                         ush.start();
                     } else if (request.equals("GET_PUBKEY")) {
                         String publicKeyString = Base64.getEncoder().encodeToString(server.getPubKey().getEncoded());

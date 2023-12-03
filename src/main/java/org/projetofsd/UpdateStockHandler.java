@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.security.*;
+import java.util.Base64;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.StringTokenizer;
@@ -17,10 +19,13 @@ public class UpdateStockHandler extends Thread implements Serializable{
     PrintWriter out;
     String request;
 
-    public UpdateStockHandler(Socket socket, Stock stock, String request) {
+    private final PrivateKey privateKey;
+
+    public UpdateStockHandler(Socket socket, Stock stock, String request, PrivateKey privateKey) {
         this.socket = socket;
         this.stock = stock;
         this.request = request;
+        this.privateKey = privateKey;
         try {
             this.in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             this.out = new PrintWriter(socket.getOutputStream());
@@ -37,7 +42,7 @@ public class UpdateStockHandler extends Thread implements Serializable{
 
 
                 stock.readStockCSV("Stock.csv");
-                String stock_response = "";
+                String stockResponse = "";
                 String msg = request;
                 StringTokenizer tokens = new StringTokenizer(msg);
                 String metodo = tokens.nextToken();
@@ -48,7 +53,7 @@ public class UpdateStockHandler extends Thread implements Serializable{
 
                     // Add or remove stock from the inventory
                     int success = stock.updateStock(productIdentifier, quantityChange);
-
+                    StringBuilder stockResponseBuilder = new StringBuilder();
                     if (success == 1) {
                         stock.saveStockCSV("Stock.csv");
                         out.println("STOCK_UPDATED");
@@ -58,18 +63,29 @@ public class UpdateStockHandler extends Thread implements Serializable{
                             String key = keys.nextElement();
                             Stock.StockInfo stockInfo = stockList.get(key);
 
-                            stock_response += "\nNome do Produto: " + stockInfo.getName() + "\nIdentificador: " + stockInfo.getIdentifier() +
-                                    "\nQuantidade em stock: " + stockInfo.getQuantity() + "\n---------------------------";
+                            stockResponseBuilder.append("Nome: ").append(stockInfo.getName()).append(", Identificador: ").append(stockInfo.getIdentifier()).append(", Quantidade: ").append(stockInfo.getQuantity()).append("\n");
+                            stockResponse = stockResponseBuilder.toString();
                         }
-                        System.out.println(stock_response);
+                        System.out.println(stockResponse);
                     } else if(success == -1) {
                         out.println("STOCK_ERROR: Excedente de quantidade.");
                     } else if (success == 0) {
                         out.println("STOCK ERROR: Produto não encontrado");
                     }
 
-
                 }
+                Signature signature = Signature.getInstance("SHA256withRSA");
+                signature.initSign(privateKey);
+                byte[] stock = stockResponse.getBytes();
+                signature.update(stock);
+                byte[] digitalSignature = signature.sign();
+
+
+                String digitalSignaturString = Base64.getEncoder().encodeToString(digitalSignature);
+
+                String stockWithSignature = stockResponse +"SIGNATURE:"+ digitalSignaturString;
+
+                out.println(stockWithSignature);
 
 
                 out.flush();
@@ -79,6 +95,12 @@ public class UpdateStockHandler extends Thread implements Serializable{
             } catch (IOException e) {
                 System.out.println("STOCK_ERROR:" + e);
                 System.exit(1);
+            } catch (NoSuchAlgorithmException e) {
+                throw new RuntimeException(e);
+            } catch (SignatureException e) {
+                throw new RuntimeException(e);
+            } catch (InvalidKeyException e) {
+                throw new RuntimeException(e);
             }
         }
     }
