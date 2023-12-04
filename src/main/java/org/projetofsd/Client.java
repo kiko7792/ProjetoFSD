@@ -122,8 +122,6 @@ public class Client {
                             String stockData = parts[0];
                             String signature = parts[1];
 
-                            System.out.println("stock:\n"+stockData);
-
                             if (client.verifySignature(stockData, signature, serverPublicKey)) {
                                 System.out.println("Assinatura verificada com sucesso.");
                                 System.out.println("Dados do Stock:\n" + stockData);
@@ -292,8 +290,8 @@ public class Client {
     private boolean verifySignature(String data, String signature, PublicKey publicKey) {
         try {
             byte[] signatureBytes = Base64.getDecoder().decode(signature);
-            System.out.println("publickey:" + publicKey);
-            System.out.println("assinatura:" + signature);
+            //System.out.println("publickey:" + publicKey);
+            //System.out.println("assinatura:" + signature);
             Signature verifier = Signature.getInstance("SHA256withRSA");
             verifier.initVerify(publicKey);
             byte[] stock = data.getBytes();

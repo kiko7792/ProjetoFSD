@@ -4,13 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb288e0b-ab37-4209-9529-2ffcf7d2e8cf" name="Changes" comment="Done(?)">
+    <list default="true" id="eb288e0b-ab37-4209-9529-2ffcf7d2e8cf" name="Changes" comment="código limpo e concluído">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Stock.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Stock.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/ClientRMI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/ClientRMI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/GetStockRequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/GetStockRequestHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/projetofsd/Stock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/projetofsd/Stock.java" afterDir="false" />
     </list>
     <list id="24557854-9598-4da7-ab5f-6926437e61d1" name="Changes by miguelmiranda" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -110,7 +107,7 @@
       <recent name="org.projetofsd" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ClientAppRMI">
+  <component name="RunManager" selected="Application.Client">
     <configuration name="Client" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.projetofsd.Client" />
       <module name="ProjetoFSD" />
@@ -128,7 +125,7 @@
     <configuration name="ClientAppRMI" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.projetofsd.ClientAppRMI" />
       <module name="ProjetoFSD" />
-      <option name="PROGRAM_PARAMETERS" value="10.8.0.3 1099" />
+      <option name="PROGRAM_PARAMETERS" value="127.0.0.1 1099" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="org.projetofsd.*" />
@@ -265,7 +262,7 @@
       <workItem from="1701598567465" duration="8409000" />
       <workItem from="1701613203361" duration="4582000" />
       <workItem from="1701642696640" duration="2964000" />
-      <workItem from="1701646008282" duration="2703000" />
+      <workItem from="1701646008282" duration="4227000" />
     </task>
     <task id="LOCAL-00001" summary="Hello World">
       <option name="closed" value="true" />
@@ -494,7 +491,14 @@
       <option name="project" value="LOCAL" />
       <updated>1701647439549</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="código limpo e concluído">
+      <created>1701649666521</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1701649666521</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -512,8 +516,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Criar Classes" />
-    <MESSAGE value="Criar conexão" />
     <MESSAGE value="Autenticação a funcionar" />
     <MESSAGE value="Listagem stcoks (duplicada)" />
     <MESSAGE value="Stock em csv" />
@@ -537,17 +539,8 @@
     <MESSAGE value="Fase 3 - RMI feito" />
     <MESSAGE value="Idk" />
     <MESSAGE value="Done(?)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Done(?)" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/projetofsd/StockServerImpl.java</url>
-          <line>182</line>
-          <option name="timeStamp" value="28" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="código limpo" />
+    <MESSAGE value="código limpo e concluído" />
+    <option name="LAST_COMMIT_MESSAGE" value="código limpo e concluído" />
   </component>
 </project>
