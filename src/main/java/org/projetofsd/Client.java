@@ -53,7 +53,6 @@ public class Client {
         System.out.println("************************************************************   ");
 
         try {
-            // Código para se conectar ao servidor e obter a chave pública
             InetAddress serverAddress = InetAddress.getByName(server);
             Socket socket = new Socket(serverAddress, port);
 
@@ -76,15 +75,12 @@ public class Client {
                 System.out.println("Erro ao receber a chave pública do servidor.");
             }
 
-            // Agora você tem a chave pública do servidor (serverPublicKey) para usar na verificação da assinatura
-            //PublicKey publicKey = getServerPublicKey(serverPublicKey);
             socket.close();
         } catch (IOException e) {
             System.out.println("Erro ao comunicar com o servidor: " + e);
             System.exit(1);
         }
 
-        System.out.println("server PubKey: " + serverPublicKey);
         Client client = new Client();
 
         //Lista o stock ao iniciar o servidor
@@ -95,7 +91,6 @@ public class Client {
                     InetAddress serverAddress = InetAddress.getByName(server);
                     Socket socket = null;
                     socket = new Socket(serverAddress, port);
-
 
                     // Create a java.io.BufferedReader for the Socket; Use java.io.Socket.getInputStream() to obtain the Socket input stream
                     BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -118,7 +113,7 @@ public class Client {
 
                     String response = responseBuilder.toString().trim();
 
-                    // Verificar se a resposta não é nula e contém dados
+                    // Verificar se a resposta não é nula e se contém os dados
                     if (!response.isEmpty()) {
                         // Verificar a assinatura com a chave pública do servidor
                         if (response.contains("SIGNATURE:")) {
@@ -128,7 +123,6 @@ public class Client {
                             String signature = parts[1];
 
                             System.out.println("stock:\n"+stockData);
-
 
                             if (client.verifySignature(stockData, signature, serverPublicKey)) {
                                 System.out.println("Assinatura verificada com sucesso.");
@@ -152,11 +146,9 @@ public class Client {
             }
         };
 
-        // Cria um temporizador que executa a tarefa a cada 5 segundos
+        // Cria um temporizador que executa a tarefa a cada 10 segundos
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(task, 0, 10000);
-
-        //requestServerPublicKey(server,port);
 
         int selection;
         do {
@@ -170,7 +162,6 @@ public class Client {
                         Socket socket = null;
                         socket = new Socket(serverAddress, port);
 
-
                         // Create a java.io.BufferedReader for the Socket; Use java.io.Socket.getInputStream() to obtain the Socket input stream
                         BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
@@ -182,19 +173,17 @@ public class Client {
                         // write the request into the Socket
                         out.println(request);
 
-                        // Read the server response - read the data until null
-                        // Receber a resposta do servidor
                         StringBuilder responseBuilder = new StringBuilder();
                         String line;
 
-                        // Ler enquanto houver dados disponíveis
+                        //Ler enquanto houverem dados disponíveis
                         while ((line = in.readLine()) != null) {
                             responseBuilder.append(line).append("\n");
                         }
 
                         String response = responseBuilder.toString().trim();
 
-                        // Verificar se a resposta não é nula e contém dados
+                        // Verificar se a resposta não é nula e se contém dados
                         if (!response.isEmpty()) {
                             // Verificar a assinatura com a chave pública do servidor
                             if (response.contains("SIGNATURE:")) {
@@ -202,9 +191,6 @@ public class Client {
                                 String[] parts = response.split("SIGNATURE:");
                                 String stockData = parts[0];
                                 String signature = parts[1];
-
-                                System.out.println("stock:\n"+stockData);
-
 
                                 if (client.verifySignature(stockData, signature, serverPublicKey)) {
                                     System.out.println("Assinatura verificada com sucesso.");
@@ -253,14 +239,14 @@ public class Client {
                         StringBuilder responseBuilder = new StringBuilder();
                         String line;
 
-                        // Ler enquanto houver dados disponíveis
+                        // Ler enquanto houverem dados disponíveis
                         while ((line = in.readLine()) != null) {
                             responseBuilder.append(line).append("\n");
                         }
 
                         String response = responseBuilder.toString().trim();
 
-                        // Verificar se a resposta não é nula e contém dados
+                        // Verificar se a resposta não é nula e se contém dados
                         if (!response.isEmpty()) {
                             // Verificar a assinatura com a chave pública do servidor
                             if (response.contains("SIGNATURE:")) {
@@ -268,8 +254,6 @@ public class Client {
                                 String[] parts = response.split("SIGNATURE:");
                                 String stockData = parts[0];
                                 String signature = parts[1];
-
-                                System.out.println("stock:\n"+stockData);
 
 
                                 if (client.verifySignature(stockData, signature, serverPublicKey)) {
@@ -324,54 +308,6 @@ public class Client {
         }
     }
 
-/*
-    public static boolean verifySignature(String serverResponse, PublicKey publicKey) {
-        try {
-            // Alteração: Remover possíveis quebras de linha (\n)
-            String cleanResponse = serverResponse.replaceAll("\n", "");
-            System.out.println("Clean Response: " + cleanResponse);  // Adicionando esta linha para debug
-            String[] parts = cleanResponse.split("SIGNATURE:");
-            if (parts.length == 2) {
-                String message = parts[0];
-                String receivedSignature = parts[1];
-
-                Signature signature = Signature.getInstance("SHA256withRSA");
-                signature.initVerify(publicKey);
-
-                byte[] messageBytes = message.getBytes();
-                signature.update(messageBytes);
-
-                byte[] receivedSignatureBytes = Base64.getDecoder().decode(receivedSignature);
-
-                return signature.verify(receivedSignatureBytes);
-            } else {
-                System.out.println("Formato de resposta inválido.");
-                return false;
-            }
-        } catch (NoSuchAlgorithmException | InvalidKeyException | SignatureException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    public static PublicKey getServerPublicKey(String publicKeyString) {
-        try {
-            // Remover qualquer caractere não válido na codificação Base64
-            String cleanKey = publicKeyString.replaceAll("[^a-zA-Z0-9+/=]", "");
-
-            // Decodificar a string da chave pública
-            byte[] keyBytes = Base64.getDecoder().decode(cleanKey);
-
-            // Converter os bytes decodificados para um objeto PublicKey
-            KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-            X509EncodedKeySpec keySpec = new X509EncodedKeySpec(keyBytes);
-            return keyFactory.generatePublic(keySpec);
-        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-*/
 private static PublicKey getServerPublicKey(String keyString) {
     try {
         byte[] keyBytes = Base64.getDecoder().decode(keyString);

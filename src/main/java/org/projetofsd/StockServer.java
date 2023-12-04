@@ -71,7 +71,7 @@ public class StockServer implements Remote {
 
         ServerSocket serverSocket = null;
 
-// Create a server socket, bound to the specified port: API java.net.ServerSocket
+        // Create a server socket, bound to the specified port: API java.net.ServerSocket
         serverSocket = new ServerSocket(portSocket);
 
         System.out.println("Servidor à espera de ligações no porto " + portSocket+"(Sockets)"+ " & "+ portRMI + "(RMI)");
@@ -81,20 +81,16 @@ public class StockServer implements Remote {
         while (true) {
             try {
 
-// Listen for a connection to be made to the socket and accepts it: API java.net.ServerSocket
+                // Listen for a connection to be made to the socket and accepts it: API java.net.ServerSocket
                 Socket connection = serverSocket.accept();
 
-
-// Start a GetStockRequestRequestHandler and UpdateStockHandler thread
-
+                // Start a GetStockRequestRequestHandler and UpdateStockHandler thread
                 BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 PrintWriter out = new PrintWriter(connection.getOutputStream(), true);
                 String request = in.readLine();
                 PrivateKey privateKey = server.getPrivKey();
-                System.out.println("Privatekey no servidor: \n"+privateKey);
-                String msg = request;
-                String PUBKEY = "";
 
+                String msg = request;
 
                 StringTokenizer tokens = new StringTokenizer(msg);
                 String metodo = tokens.nextToken();

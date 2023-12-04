@@ -25,26 +25,6 @@ public class StockServerImpl extends UnicastRemoteObject implements StockServerI
         return publicKey;
     }
 
-    /*
-    public void keyPairGenerator() throws NoSuchAlgorithmException{
-        KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance("RSA");
-        keyPairGen.initialize(2048);
-        KeyPair pair = keyPairGen.generateKeyPair();
-        privKey = pair.getPrivate();
-        publicKey = pair.getPublic();
-    }
-
-    public PrivateKey getPrivKey(){
-        return privKey;
-    }
-    public PublicKey getPubKey(){
-        return publicKey;
-    }
-    */
-
-
-
-
     @Override
     public void saveStockCSVRMI(String filename) throws RemoteException {
         synchronized (this) {
@@ -56,34 +36,8 @@ public class StockServerImpl extends UnicastRemoteObject implements StockServerI
                 }
 
             } catch (IOException e) {
-                System.err.println("Erro ao salvar o stock em CSV: " + e.getMessage());
-                throw new RemoteException("Erro ao salvar o stock em CSV", e);
-            }
-        }
-    }
-    @Override
-    public void readStockCSVRMI(String filename) throws RemoteException {
-        synchronized (this) {
-            try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
-                // Salta a primeira linha, que é o cabeçalho do CSV
-                String linha;
-                reader.readLine();
-
-                while ((linha = reader.readLine()) != null) {
-                    String[] partes = linha.split(",");
-                    if (partes.length == 3) {
-                        String nome = partes[0];
-                        String identificador = partes[1];
-                        int quantidade = Integer.parseInt(partes[2]);
-
-                        // Atualiza o stock com os dados lidos
-                        Stock.StockInfo stockInfo = new Stock.StockInfo(nome, identificador, quantidade);
-                        Stock.presentStock.put(identificador, stockInfo);
-                    }
-                }
-            } catch (IOException e) {
-                System.err.println("Erro ao ler o stock de CSV: " + e.getMessage());
-                throw new RemoteException("Erro ao ler o stock de CSV", e);
+                System.err.println("Erro ao salvar o stock no CSV: " + e.getMessage());
+                throw new RemoteException("Erro ao salvar o stock no CSV", e);
             }
         }
     }
@@ -134,28 +88,6 @@ public class StockServerImpl extends UnicastRemoteObject implements StockServerI
         return stockDetails.toString();
     }
 
-    @Override
-    public String stock_update(String id, int qty) throws RemoteException {
-
-        int success = updateStockRMI(id, qty);
-
-        if(success == 1){
-            System.out.println("STOCK_UPDATED");
-            String stock = "\nSTOCK_UPDATED\n";
-            stock += stock_request();
-            notifySubscribers("\nStock updated by user: \n" + stock_request());
-            return stock;
-
-        }else{
-            return "STOCK_ERROR";
-        }
-    }
-
-    private void notifySubscribers(String message) throws RemoteException {
-        for (SecureDirectNotificationInterface directNotification : subscribers) {
-            directNotification.notifyStockUpdate(message);
-        }
-    }
     private void notifySubscribersWithSignature(String message, String signature) throws RemoteException {
         for (SecureDirectNotificationInterface directNotification : subscribers) {
             directNotification.stockUpdatedSigned(message,signature);
@@ -165,7 +97,6 @@ public class StockServerImpl extends UnicastRemoteObject implements StockServerI
     @Override
     public String getStockWithSignature() throws RemoteException {
         try {
-            // Lógica para obter o stock (substitua com sua lógica real)
             Stock stock = new Stock();
             stock.readStockCSV("Stock.csv");
 
@@ -185,7 +116,6 @@ public class StockServerImpl extends UnicastRemoteObject implements StockServerI
             byte[] digitalSignature = signature.sign();
 
             String signatureString = Base64.getEncoder().encodeToString(digitalSignature);
-
 
             // Devolve o stock e assinatura digital concatenados
             return stockDetails.toString()+"."+signatureString+"."+bytesToHex(messageHash);

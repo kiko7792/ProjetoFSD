@@ -56,8 +56,6 @@ public class GetStockRequestHandler extends Thread implements Serializable {
                     stockResponse = stockResponseBuilder.toString();
                 }
 
-                System.out.println("privKey Handler:\n" + privateKey);
-
                 Signature signature = Signature.getInstance("SHA256withRSA");
                 signature.initSign(privateKey);
                 byte[] stock = stockResponse.getBytes();
@@ -87,18 +85,6 @@ public class GetStockRequestHandler extends Thread implements Serializable {
         }
     }
 
-    private String signMessage(String message, PrivateKey privKey) {
-        try {
-            Signature signature = Signature.getInstance("SHA256withRSA"); // ou o algoritmo correspondente à sua chave
-            signature.initSign(privKey);
-            signature.update(message.getBytes());
-            byte[] signatureBytes = signature.sign();
-            return Base64.getEncoder().encodeToString(signatureBytes);
-        } catch (NoSuchAlgorithmException | InvalidKeyException | SignatureException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
 }
 
 

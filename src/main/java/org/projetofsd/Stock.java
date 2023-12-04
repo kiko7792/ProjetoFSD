@@ -30,7 +30,7 @@ public class Stock extends UnicastRemoteObject{
                 }
 
             } catch (IOException e) {
-                System.err.println("Erro ao salvar o stock em CSV: " + e.getMessage());
+                System.err.println("Erro ao salvar o stock no CSV: " + e.getMessage());
             }
         }
     }
@@ -56,7 +56,7 @@ public class Stock extends UnicastRemoteObject{
                     }
                 }
             } catch (IOException e) {
-                System.err.println("Erro ao ler o stock de CSV: " + e.getMessage());
+                System.err.println("Erro ao ler o stock do CSV: " + e.getMessage());
             }
         }
     }

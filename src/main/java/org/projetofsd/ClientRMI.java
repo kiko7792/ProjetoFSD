@@ -20,7 +20,7 @@ public class ClientRMI {
     }
     public void putPresence() {
         if (args.length != 2) {
-            System.out.println("Erro: use java ClientApp <ipClient> <ipNameServer>");
+            System.out.println("Erro: use java ClientApp <ipServer> <portServer>");
             System.exit(-1);
         }
 
@@ -144,12 +144,10 @@ public class ClientRMI {
     }
 
     private static String tamperSignature(String originalSignature) {
-        // Substituímos os dois primeiros caracteres da assinatura simulando uma alteração maliciosa
         return "XX" + originalSignature.substring(2);
     }
 
     private String tamperMessage(String originalMessage) {
-        // Aqui, você pode, por exemplo, adicionar ou remover caracteres da mensagem
         return "TAMPERED_" + originalMessage;
     }
 
